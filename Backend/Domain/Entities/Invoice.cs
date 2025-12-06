@@ -1,16 +1,22 @@
-public class Product
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+public class Invoice
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; } = default!;
-    public decimal Price { get; set; }
-    public int Quantity { get; private set; }
-    public Guid CategoryId { get; set; }
-    public Category Category { get; set; } = default!;
-    public void AddStock(int amount) => Quantity += amount; 
-    public void ReduceStock(int amount)
-    {
-        if (amount > Quantity)
-            throw new Exception("Not enough stock"); 
-        Quantity -= amount;
-    }
+    [Key]
+    public int InvoiceId { get; set; }
+
+    [Required]
+    public DateTime InvoiceDate { get; set; } = DateTime.UtcNow;
+
+    [Column(TypeName = "decimal(18,2)")]
+    public decimal TotalAmount { get; set; }
+
+    // Customer FK
+    [ForeignKey(nameof(Customer))]
+    public int CustomerId { get; set; }
+    public Customer Customer { get; set; }
+
+    // Relationships
+    public ICollection<InvoiceItem> InvoiceItems { get; set; }
 }

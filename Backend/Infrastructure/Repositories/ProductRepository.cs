@@ -14,10 +14,9 @@ public class ProductRepository : RepositoryBase<Product>, IProductRepository
     public async Task<IEnumerable<Product>> GetAllProductsAsync(bool trackChanges)=>
         await FindAll(trackChanges).ToListAsync();
 
-    public async Task<IEnumerable<Product>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)=>
-      await FindByCondition(product => ids.Equals(product.Id), trackChanges).ToListAsync();
-    
+    public async Task<IEnumerable<Product>> GetByIdsAsync(IEnumerable<int> ids, bool trackChanges)=>
+      await FindByCondition(product => ids.Equals(product.Id), trackChanges).ToListAsync(); 
 
-    public async Task<IEnumerable<Product>> GetProductsAsync(IEnumerable<Guid> ids, bool trackChanges)=>
+    public async Task<IEnumerable<Product>> GetProductsAsync(IEnumerable<int> ids, bool trackChanges)=>
        await FindByCondition(product => ids.Contains(product.Id), trackChanges).ToListAsync();
 }
