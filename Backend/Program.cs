@@ -6,6 +6,7 @@ builder.Services.AddOpenApi();
 //  cors policy
  builder.Services.ConfigureCors();
 // Di
+builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 var app = builder.Build();
 
