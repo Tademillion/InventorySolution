@@ -13,7 +13,6 @@ public abstract class RepositoryBase<TEntity> where TEntity : class
      public IQueryable<TEntity> FindAll(bool trackChanges) =>
   !trackChanges ?_context.Set<TEntity>().AsNoTracking() : _context.Set<TEntity>();
 
-
    public IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression,
  bool trackChanges) =>
  !trackChanges ?
