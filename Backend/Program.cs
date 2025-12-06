@@ -5,7 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 //  cors policy
  builder.Services.ConfigureCors();
-
+// Di
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
