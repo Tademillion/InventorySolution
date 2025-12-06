@@ -15,4 +15,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection(); 
+app.UseCors("CorsPolicy");
 app.Run();
