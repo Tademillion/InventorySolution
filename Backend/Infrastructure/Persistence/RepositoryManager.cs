@@ -1,7 +1,6 @@
 public class RepositoryManager : IRepositoryManager
 {
     private readonly ApplicationDBContext _context;
-
     public RepositoryManager(ApplicationDBContext context)
     {
         _context = context;
