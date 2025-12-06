@@ -1,37 +1,29 @@
-// public abstract class RepositoryBase<TEntity> where TEntity : class
-// {
-//     protected readonly DbContext _context;
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 
-//     protected RepositoryBase(DbContext context)
-//     {
-//         _context = context;
-//     }
+public abstract class RepositoryBase<TEntity> where TEntity : class
+{
+    protected readonly ApplicationDBContext _context;
 
-//     public virtual async Task<TEntity> GetByIdAsync(int id)
-//     {
-//         return await _context.Set<TEntity>().FindAsync(id);
-//     }
+    protected RepositoryBase(ApplicationDBContext context)
+    {
+        _context = context;
+    }
 
-//     public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
-//     {
-//         return await _context.Set<TEntity>().ToListAsync();
-//     }
+     public IQueryable<TEntity> FindAll(bool trackChanges) =>
+  !trackChanges ?_context.Set<TEntity>().AsNoTracking() : _context.Set<TEntity>();
 
-//     public virtual async Task AddAsync(TEntity entity)
-//     {
-//         await _context.Set<TEntity>().AddAsync(entity);
-//         await _context.SaveChangesAsync();
-//     }
 
-//     public virtual async Task UpdateAsync(TEntity entity)
-//     {
-//         _context.Set<TEntity>().Update(entity);
-//         await _context.SaveChangesAsync();
-//     }
+   public IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression,
+ bool trackChanges) =>
+ !trackChanges ?
+ _context.Set<TEntity>()
+ .Where(expression)
+ .AsNoTracking() :
+ _context.Set<TEntity>()
+ .Where(expression);
 
-//     public virtual async Task DeleteAsync(TEntity entity)
-//     {
-//         _context.Set<TEntity>().Remove(entity);
-//         await _context.SaveChangesAsync();
-//     }
-// }
+  public void Create(TEntity entity) => _context.Set<TEntity>().Add(entity);
+  public void Update(TEntity entity) => _context.Set<TEntity>().Update(entity);
+  public void Delete(TEntity entity) => _context.Set<TEntity>().Remove(entity);
+}
