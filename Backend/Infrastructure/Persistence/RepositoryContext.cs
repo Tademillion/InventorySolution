@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 public class ApplicationDBContext : IdentityDbContext<User>
 {
-    public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
+    public ApplicationDBContext(DbContextOptions options) : base(options)
     {
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
