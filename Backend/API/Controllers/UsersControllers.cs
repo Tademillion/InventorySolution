@@ -9,13 +9,12 @@ public class UsersController : ControllerBase
 {
    private readonly ILogger<UsersController> _logger;
    private readonly UserManager<User> _userManager;
-   private readonly IRepositoryManager _repository;
-   private readonly IMapper _mapper;
-  public UsersController(ILogger<UsersController> logger, UserManager<User> userManager, IRepositoryManager repository)
+    private readonly IMapper _mapper;
+   public UsersController(ILogger<UsersController> logger, UserManager<User> userManager, IMapper mapper)
   {
     _logger = logger;
     _userManager = userManager;
-    _repository = repository;
+     _mapper = mapper;
   }
   [HttpGet]
 public async Task<IActionResult> GetAllUsers()
@@ -49,6 +48,7 @@ public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto 
     //  login
     public async Task<IActionResult> LoginUser()
     {
+        //  login using Jwt
         return Ok();
     }
  }

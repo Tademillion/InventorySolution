@@ -11,6 +11,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
  builder.Services.ConfigureCors();
 // Di
 builder.Services.ConfigureSqlContext(builder.Configuration);
+//  identity
 builder.Services.AddIdentity<User, IdentityRole>(opt =>
 {
     opt.Password.RequireDigit = true;
@@ -23,6 +24,9 @@ builder.Services.AddIdentity<User, IdentityRole>(opt =>
     .AddEntityFrameworkStores<ApplicationDBContext>()
     .AddDefaultTokenProviders();
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+builder.Services.AddAuthorization();
+// controllers
+builder.Services.AddControllers();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,6 +37,8 @@ if (app.Environment.IsDevelopment())
 app.UseGlobalExceptionHandler();
 app.UseHttpsRedirection(); 
 app.UseCors("CorsPolicy");
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllers();
 app.Run();
