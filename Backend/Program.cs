@@ -28,7 +28,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
+app.UseGlobalExceptionHandler();
 app.UseHttpsRedirection(); 
 app.UseCors("CorsPolicy");
 app.UseAuthentication();
