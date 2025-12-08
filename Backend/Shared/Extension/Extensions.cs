@@ -11,9 +11,8 @@ public static class ServiceExtensions
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
-                       .AllowAnyHeader()
-                       .AllowCredentials();
-            });
+                       .AllowAnyHeader();
+             });
         });
     }
     public static void ConfigureSqlContext(this IServiceCollection services,  
