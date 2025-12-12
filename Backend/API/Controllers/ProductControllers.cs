@@ -24,5 +24,24 @@ public async Task<IActionResult> GetAllProducts()
     return Ok(products);
 
 } 
-
+[HttpGet("{id}", Name = "GetProductById")]
+public async Task<IActionResult> GetProductById(int id)
+{
+    var product = await _repository.Product.GetByIdsAsync(id, trackChanges: false);
+    if (product == null)
+    {
+        return NotFound();
+    }
+    return Ok(product);
+}
+//  post
+[HttpPost]
+public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto createProductDto)
+{
+    var productEntity = _mapper.Map<Product>(createProductDto);
+    _repository.Product.CreateProduct(productEntity);
+    await _repository.SaveAsync();
+    var productToReturn = _mapper.Map<ProductDto>(productEntity);
+    return CreatedAtRoute("GetProductById", new { id = productToReturn.ProductId }, productToReturn); 
+}
 }

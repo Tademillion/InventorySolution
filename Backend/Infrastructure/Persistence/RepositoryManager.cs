@@ -2,6 +2,7 @@ public class RepositoryManager : IRepositoryManager
 {
     private readonly ApplicationDBContext _context;
     private IProductRepository _productRepository;
+    private ISupplierRepository _supplierRepository;
     public RepositoryManager(ApplicationDBContext context)
     {
         _context = context;
@@ -16,6 +17,15 @@ public class RepositoryManager : IRepositoryManager
                 _productRepository = new ProductRepository(_context);
             
             return _productRepository;
+        }
+    }
+
+    public ISupplierRepository Supplier {
+       get
+        {
+            if(_supplierRepository == null) 
+                _supplierRepository = new SupplierRepository(_context); 
+            return _supplierRepository;
         }
     }
 
