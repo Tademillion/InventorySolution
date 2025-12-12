@@ -22,5 +22,9 @@ public class MappingProfile : Profile
                        opt => opt.MapFrom(src => src.Category.Name))
             .ForMember(dest => dest.SupplierName, 
                        opt => opt.MapFrom(src => src.Supplier.Name));
+                    //    Supplier
+        CreateMap<SupplierUpdateDto, Supplier>();
+        CreateMap<SupplierDto, Supplier>();
+        CreateMap<SupplierCreateDto, Supplier>();
     }
 }

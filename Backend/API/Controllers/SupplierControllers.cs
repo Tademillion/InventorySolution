@@ -35,7 +35,7 @@ public class SupplierControllers : ControllerBase
     }
 
     // post
-    [HttpPost("create")]
+    [HttpPost]
     public async Task<IActionResult> CreateSupplier([FromBody] SupplierCreateDto createSupplierDto)
     {
         var supplierEntity = _mapper.Map<Supplier>(createSupplierDto);
@@ -43,5 +43,20 @@ public class SupplierControllers : ControllerBase
         await _repository.SaveAsync();
         var supplierToReturn = _mapper.Map<SupplierDto>(supplierEntity);
         return CreatedAtRoute("GetSupplierById", new { id = supplierToReturn.SupplierId }, supplierToReturn);
+    
+     }
+    //   update
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateSupplier(int id, [FromBody] SupplierUpdateDto supplierDto)
+    {
+        var supplierEntity = await _repository.Supplier.GetSupplierAsync(id, trackChanges: true);
+        _logger.LogInformation($"Updating supplier with ID: {supplierEntity.Address}");
+        if (supplierEntity == null)
+        {
+            return NotFound();
+        }
+        _mapper.Map(supplierDto, supplierEntity);
+        await _repository.SaveAsync();
+        return NoContent();
     }
 }

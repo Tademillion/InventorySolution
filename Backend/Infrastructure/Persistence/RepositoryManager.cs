@@ -3,6 +3,8 @@ public class RepositoryManager : IRepositoryManager
     private readonly ApplicationDBContext _context;
     private IProductRepository _productRepository;
     private ISupplierRepository _supplierRepository;
+    private ICategoryRepository _categoryRepository;
+
     public RepositoryManager(ApplicationDBContext context)
     {
         _context = context;
@@ -29,6 +31,16 @@ public class RepositoryManager : IRepositoryManager
         }
     }
 
+//  category
+    public ICategoryRepository Category
+    {
+        get
+        {
+            if(_categoryRepository == null)
+                _categoryRepository = new CategoryRepository(_context);
+            return _categoryRepository;
+        }
+    }
     public async Task SaveAsync()
     {
         await _context.SaveChangesAsync();

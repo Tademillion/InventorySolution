@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 // mapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+// builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //  cors policy
  builder.Services.ConfigureCors();
 // Di
