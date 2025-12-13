@@ -6,6 +6,7 @@ public class RepositoryManager : IRepositoryManager
     private ICategoryRepository _categoryRepository;
     private IInvoiceRepository _invoiceRepository;
     private ICustomerRepository _customerRepository;
+    private IStockMovementRepository _stockMovementRepository;
     public RepositoryManager(ApplicationDBContext context)
     {
         _context = context;
@@ -63,7 +64,15 @@ public class RepositoryManager : IRepositoryManager
         }
         
     }
-
+public IStockMovementRepository StockMovement 
+    {
+        get
+        {
+            if (_stockMovementRepository == null)
+                _stockMovementRepository = new StockMovementRepository(_context);
+            return _stockMovementRepository;
+        }
+    }
     public async Task SaveAsync()
     {
         await _context.SaveChangesAsync();

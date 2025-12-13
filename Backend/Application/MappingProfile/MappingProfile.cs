@@ -38,6 +38,10 @@ public class MappingProfile : Profile
         CreateMap<Customer, CustomerDto>();
         CreateMap<CreateCustomerDto, Customer>();
         CreateMap<UpdateCustomerDto, Customer>();
+        // stock movement
+        CreateMap<StockMovement, StockMovementDto>();
+        CreateMap<CreateStockMovementDto, StockMovement>();
+        CreateMap<UpdateStockMovementDto, StockMovement>();
 
      }
 
