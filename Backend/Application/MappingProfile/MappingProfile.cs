@@ -24,7 +24,7 @@ public class MappingProfile : Profile
                        opt => opt.MapFrom(src => src.Supplier.Name));
                     //    Supplier
         CreateMap<SupplierUpdateDto, Supplier>();
-        CreateMap<SupplierDto, Supplier>();
+        CreateMap<Supplier, SupplierDto>();
         CreateMap<SupplierCreateDto, Supplier>();
         //  Category
         CreateMap<CreateCategoryDto, Category>();
