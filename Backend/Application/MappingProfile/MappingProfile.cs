@@ -30,6 +30,10 @@ public class MappingProfile : Profile
         CreateMap<CreateCategoryDto, Category>();
         CreateMap<UpdateCategoryDto, Category>();
         CreateMap<Category, CategoryDto>();
+        //  invoices
+        CreateMap<Invoice, InvoiceDto>();
+        CreateMap<CreateInvoiceDto, Invoice>();
+        CreateMap<UpdateInvoiceDto, Invoice>();
 
      }
 
