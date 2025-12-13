@@ -26,5 +26,11 @@ public class MappingProfile : Profile
         CreateMap<SupplierUpdateDto, Supplier>();
         CreateMap<SupplierDto, Supplier>();
         CreateMap<SupplierCreateDto, Supplier>();
-    }
+        //  Category
+        CreateMap<CreateCategoryDto, Category>();
+        CreateMap<UpdateCategoryDto, Category>();
+        CreateMap<Category, CategoryDto>();
+
+     }
+
 }

@@ -17,4 +17,9 @@ public class CategoryRepository : RepositoryBase<Category>, ICategoryRepository
         .SingleOrDefaultAsync();
 
     public void CreateCategory(Category category) => Create(category);
+
+    public Task<IEnumerable<Category>> GetByIdAsync(int id, bool trackChanges)
+    => FindByCondition(c => c.CategoryId == id, trackChanges)
+        .ToListAsync()
+        .ContinueWith(t => (IEnumerable<Category>)t.Result);
 }
