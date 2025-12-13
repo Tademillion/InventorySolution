@@ -5,7 +5,7 @@ public class RepositoryManager : IRepositoryManager
     private ISupplierRepository _supplierRepository;
     private ICategoryRepository _categoryRepository;
     private IInvoiceRepository _invoiceRepository;
-
+    private ICustomerRepository _customerRepository;
     public RepositoryManager(ApplicationDBContext context)
     {
         _context = context;
@@ -51,6 +51,17 @@ public class RepositoryManager : IRepositoryManager
                 _invoiceRepository = new InvoiceRepository(_context);
             return _invoiceRepository;
         }
+    }
+
+    public ICustomerRepository Customer 
+    {
+        get
+        {
+            if (_customerRepository == null)
+                _customerRepository = new CustomerRepository(_context);
+            return _customerRepository;
+        }
+        
     }
 
     public async Task SaveAsync()

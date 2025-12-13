@@ -34,6 +34,10 @@ public class MappingProfile : Profile
         CreateMap<Invoice, InvoiceDto>();
         CreateMap<CreateInvoiceDto, Invoice>();
         CreateMap<UpdateInvoiceDto, Invoice>();
+        //  customer
+        CreateMap<Customer, CustomerDto>();
+        CreateMap<CreateCustomerDto, Customer>();
+        CreateMap<UpdateCustomerDto, Customer>();
 
      }
 
