@@ -33,6 +33,8 @@ export function CategoryDialog({ open, onOpenChange, category, onSave }: Categor
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    console.log("Submitting form data:", formData)
+
     onSave(formData)
     onOpenChange(false)
   }

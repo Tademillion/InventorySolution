@@ -9,23 +9,22 @@ import type { Category } from "@/lib/types"
 import { Plus, Pencil } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
+import { useCreateCategory } from "@/hooks/Category/UseCreateCategory"
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState(MOCK_CATEGORIES)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [editingCategory, setEditingCategory] = useState<Category | undefined>()
-
+  const { createCategory, loading } = useCreateCategory()
   const handleSave = (categoryData: Partial<Category>) => {
     if (editingCategory) {
+      createCategory(categoryData as Category)
+      console.log("Updating category:", categoryData)
       setCategories(categories.map((c) => (c.id === editingCategory.id ? { ...c, ...categoryData } : c)))
-    } else {
-      const newCategory: Category = {
-        id: Date.now().toString(),
-        name: categoryData.name!,
-        description: categoryData.description || "",
-        createdAt: new Date(),
-      }
-      setCategories([...categories, newCategory])
+    } else { 
+       console.log("Creating category:", categoryData)
+      setCategories([...categories, categoryData as Category])
+      createCategory(categoryData as Category)
     }
     setEditingCategory(undefined)
   }
@@ -49,11 +48,11 @@ export default function CategoriesPage() {
     {
       header: "Description",
       accessor: "description" as const,
-    },
-    {
-      header: "Created",
-      accessor: (row: Category) => row.createdAt.toLocaleDateString(),
-    },
+    }
+    // {
+    //   header: "Created",
+    //   accessor: (row: Category) => row.createdAt.toLocaleDateString(),
+    // },
   ]
 
   return (
