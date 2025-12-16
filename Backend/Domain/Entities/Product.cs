@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Product
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid ProductId { get; set; }
 
     [Required, MaxLength(50)]
     public string Sku { get; set; } = default!;

@@ -14,7 +14,7 @@ public class Invoice
 
     // Customer FK
     [ForeignKey(nameof(Customer))]
-    public int CustomerId { get; set; }
+    public Guid CustomerId { get; set; }
     public Customer Customer { get; set; }
 
     // Relationships

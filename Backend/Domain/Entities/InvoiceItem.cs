@@ -17,11 +17,11 @@ public class InvoiceItem
 
     // Invoice FK
     [ForeignKey(nameof(Invoice))]
-    public int InvoiceId { get; set; }
+    public Guid InvoiceId { get; set; }
     public Invoice Invoice { get; set; }
 
     // Product FK
     [ForeignKey(nameof(Product))]
-    public int ProductId { get; set; }
+    public Guid ProductId { get; set; }
     public Product Product { get; set; }
 }
