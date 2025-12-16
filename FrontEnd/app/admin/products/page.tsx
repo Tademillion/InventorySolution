@@ -10,13 +10,15 @@ import type { Product } from "@/lib/types"
 import { Plus, Pencil, AlertTriangle } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
+import { useProducts } from "@/hooks/Products/UseProducts"
 
 export default function ProductsPage() {
   const [products, setProducts] = useState(MOCK_PRODUCTS)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<Product | undefined>()
 
-  const handleSave = (productData: Partial<Product>) => {
+      const {loading,products:product}= useProducts();
+   const handleSave = (productData: Partial<Product>) => {
     if (editingProduct) {
       // Update existing
       setProducts(products.map((p) => (p.id === editingProduct.id ? { ...p, ...productData } : p)))

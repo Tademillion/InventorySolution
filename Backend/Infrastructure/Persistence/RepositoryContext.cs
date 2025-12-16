@@ -18,5 +18,6 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<Invoice> Invoices { get; set; }
     public DbSet<InvoiceItem> InvoiceItems { get; set; }
     public DbSet<StockMovement> StockMovements { get; set; }
+    public DbSet<Warehouse> Warehouses { get; set; }
     
   }

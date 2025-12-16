@@ -6,30 +6,50 @@ public class Product
     [Key]
     public int Id { get; set; }
 
-    [Required, MaxLength(150)]
-    public string Name { get; set; }
+    [Required, MaxLength(50)]
+    public string Sku { get; set; } = default!;
 
-    [MaxLength(250)]
+    [Required, MaxLength(150)]
+    public string Name { get; set; } = default!;
+
+    [MaxLength(500)]
     public string? Description { get; set; }
 
-    [Column(TypeName = "decimal(18,2)")]
-    // [Range(0, 999999)]
+    [Required]
     public decimal Price { get; set; }
 
-    [Range(0, int.MaxValue)]
-    public int StockQuantity { get; set; }
+    [Required]
+    public decimal Cost { get; set; }
 
-    // Category FK
-    [ForeignKey(nameof(Category))]
-    public int CategoryId { get; set; }
-    public Category Category { get; set; }
+    [Required]
+    public int Stock { get; set; }
 
-    // Supplier FK
-    [ForeignKey(nameof(Supplier))]
-    public int SupplierId { get; set; }
-    public Supplier Supplier { get; set; }
+    public int ReorderLevel { get; set; }
+    public int ReorderQuantity { get; set; }
 
-    // Relationships
-    public ICollection<InvoiceItem> InvoiceItems { get; set; } 
-    public ICollection<StockMovement> StockMovements { get; set; }
+    [Required]
+    public string Unit { get; set; } = "pcs";
+
+    public bool HasBatchTracking { get; set; }
+    public bool HasExpiryTracking { get; set; }
+
+    public string? Barcode { get; set; }
+    public string? ImageUrl { get; set; }
+
+    public bool IsActive { get; set; } = true;
+
+    // 🔗 Relationships
+    public Guid CategoryId { get; set; }
+    public Category Category { get; set; } = default!;
+
+    public Guid SupplierId { get; set; }
+    public Supplier Supplier { get; set; } = default!;
+
+    public Guid WarehouseId { get; set; }
+    public Warehouse Warehouse { get; set; } = default!;
+
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+    public ICollection<StockMovement> StockMovements { get; set; } = new List<StockMovement>();
 }
