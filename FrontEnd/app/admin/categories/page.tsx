@@ -1,30 +1,29 @@
 "use client"
 
-import { useState } from "react"
-import { DataTable } from "@/components/data-table"
 import { CategoryDialog } from "@/components/category-dialog"
+import { DataTable } from "@/components/data-table"
 import { Button } from "@/components/ui/button"
-import { MOCK_CATEGORIES } from "@/lib/mock-data"
-import type { Category } from "@/lib/types"
-import { Plus, Pencil } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { MoreHorizontal } from "lucide-react"
-import { useCreateCategory } from "@/hooks/Category/UseCreateCategory"
+import { useCategory } from "@/hooks/Category/UseCategory"
+import type { Category } from "@/lib/types"
+import { MoreHorizontal, Pencil, Plus } from "lucide-react"
+import { useState } from "react"
 
 export default function CategoriesPage() {
-  const [categories, setCategories] = useState(MOCK_CATEGORIES)
+  const { categories ,addCategory } = useCategory()
+
+  // const [categories, setCategories] = useState(categ)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [editingCategory, setEditingCategory] = useState<Category | undefined>()
-  const { createCategory, loading } = useCreateCategory()
-  const handleSave = (categoryData: Partial<Category>) => {
+   const handleSave = (categoryData: Partial<Category>) => {
     if (editingCategory) {
-      createCategory(categoryData as Category)
+      addCategory(categoryData as Category)
       console.log("Updating category:", categoryData)
-      setCategories(categories.map((c) => (c.id === editingCategory.id ? { ...c, ...categoryData } : c)))
+      // setCategories(categories.map((c) => (c.id === editingCategory.id ? { ...c, ...categoryData } : c)))
     } else { 
        console.log("Creating category:", categoryData)
-      setCategories([...categories, categoryData as Category])
-      createCategory(categoryData as Category)
+      // setCategories([...categories, categoryData as Category])
+      addCategory(categoryData as Category)
     }
     setEditingCategory(undefined)
   }

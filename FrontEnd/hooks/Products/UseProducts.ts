@@ -1,11 +1,12 @@
 "use client";
 
+import { Product } from "@/lib/types";
 import { ProductService } from "@/Services/Products/product.services";
 import { ProductDto } from "@/Types/product";
 import { useEffect, useState } from "react"; 
 
 export function useProducts() {
-  const [products, setProducts] = useState<ProductDto[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 // Fetch products on mount
   useEffect(() => {

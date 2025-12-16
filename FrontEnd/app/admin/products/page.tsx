@@ -13,34 +13,34 @@ import { MoreHorizontal } from "lucide-react"
 import { useProducts } from "@/hooks/Products/UseProducts"
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState(MOCK_PRODUCTS)
+  // const [products, setProducts] = useState(MOCK_PRODUCTS)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<Product | undefined>()
 
-      const {loading,products:product}= useProducts();
+      const {products}= useProducts();
    const handleSave = (productData: Partial<Product>) => {
     if (editingProduct) {
-      // Update existing
-      setProducts(products.map((p) => (p.id === editingProduct.id ? { ...p, ...productData } : p)))
-    } else {
-      // Create new
-      const newProduct: Product = {
-        id: Date.now().toString(),
-        sku: productData.sku!,
-        name: productData.name!,
-        description: productData.description || "",
-        categoryId: productData.categoryId!,
-        categoryName: MOCK_CATEGORIES.find((c) => c.id === productData.categoryId)?.name || "",
-        price: productData.price!,
-        cost: productData.cost!,
-        stock: 0,
-        reorderLevel: productData.reorderLevel!,
-        supplierId: productData.supplierId!,
-        supplierName: MOCK_SUPPLIERS.find((s) => s.id === productData.supplierId)?.name || "",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }
-      setProducts([...products, newProduct])
+    //   // Update existing
+    //   setProducts(products.map((p) => (p.id === editingProduct.id ? { ...p, ...productData } : p)))
+    // } else {
+    //   // Create new
+    //   const newProduct: Product = {
+    //     id: Date.now().toString(),
+    //     sku: productData.sku!,
+    //     name: productData.name!,
+    //     description: productData.description || "",
+    //     categoryId: productData.categoryId!,
+    //     categoryName: MOCK_CATEGORIES.find((c) => c.id === productData.categoryId)?.name || "",
+    //     price: productData.price!,
+    //     cost: productData.cost!,
+    //     stock: 0,
+    //     reorderLevel: productData.reorderLevel!,
+    //     supplierId: productData.supplierId!,
+    //     supplierName: MOCK_SUPPLIERS.find((s) => s.id === productData.supplierId)?.name || "",
+    //     createdAt: new Date(),
+    //     updatedAt: new Date(),
+    //   }
+    //   setProducts([...products, newProduct])
     }
     setEditingProduct(undefined)
   }

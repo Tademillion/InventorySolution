@@ -1,8 +1,9 @@
 import { CreateProductDto, ProductDto } from "@/Types/product";
 import { http } from "../http";
+import { Product } from "@/lib/types";
 
 export const ProductService = {
-  getAll: () => http.get<ProductDto[]>("/products"),
+  getAll: () => http.get<Product[]>("/products"),
 
   getById: (id: number) =>
     http.get<ProductDto>(`/products/${id}`),
