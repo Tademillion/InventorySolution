@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Invoice
 {
     [Key]
-    public int InvoiceId { get; set; }
+    public Guid InvoiceId { get; set; }
 
     [Required]
     public DateTime InvoiceDate { get; set; } = DateTime.UtcNow;

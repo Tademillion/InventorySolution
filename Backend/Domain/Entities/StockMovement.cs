@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class StockMovement
 {
     [Key]
-    public int StockMovementId { get; set; }
+    public Guid StockMovementId { get; set; }
 
     [Required]
     public DateTime MovementDate { get; set; } = DateTime.UtcNow;

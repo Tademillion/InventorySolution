@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class InvoiceItem
 {
     [Key]
-    public int InvoiceItemId { get; set; }
+    public Guid InvoiceItemId { get; set; }
 
     [Required]
     public int Quantity { get; set; }

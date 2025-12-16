@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 public class Category
 {
     [Key]
-    public int CategoryId { get; set; } 
+    public Guid CategoryId { get; set; } 
     [Required, MaxLength(100)]
     public string Name { get; set; } 
     [MaxLength(250)]

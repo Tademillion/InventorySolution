@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 public class Supplier
 {
     [Key]
-    public int SupplierId { get; set; } 
+    public Guid SupplierId { get; set; } 
     [Required, MaxLength(150)]
     public string Name { get; set; } 
     [MaxLength(150)]
