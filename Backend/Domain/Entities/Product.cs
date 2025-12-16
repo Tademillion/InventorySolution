@@ -8,6 +8,13 @@ public class Product
 
     [Required, MaxLength(50)]
     public string Sku { get; set; } = default!;
+    public void AssignSku(string sku)
+{
+    if (!string.IsNullOrWhiteSpace(Sku))
+        throw new InvalidOperationException("SKU already assigned");
+
+    Sku = sku;
+}
 
     [Required, MaxLength(150)]
     public string Name { get; set; } = default!;
