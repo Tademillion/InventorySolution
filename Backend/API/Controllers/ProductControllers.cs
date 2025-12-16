@@ -25,7 +25,7 @@ public async Task<IActionResult> GetAllProducts()
 
 } 
 [HttpGet("{id}", Name = "GetProductById")]
-public async Task<IActionResult> GetProductById(int id)
+public async Task<IActionResult> GetProductById(Guid id)
 {
     var product = await _repository.Product.GetByIdsAsync(id, trackChanges: false);
     if (product == null)

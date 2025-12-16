@@ -12,13 +12,13 @@ public class CategoryRepository : RepositoryBase<Category>, ICategoryRepository
         .OrderBy(c => c.Name)
         .ToListAsync();
 
-    public async Task<Category> GetCategoryAsync(int categoryId, bool trackChanges) =>
+    public async Task<Category> GetCategoryAsync(Guid categoryId, bool trackChanges) =>
         await FindByCondition(c => c.CategoryId == categoryId, trackChanges)
         .SingleOrDefaultAsync();
 
     public void CreateCategory(Category category) => Create(category);
 
-    public Task<IEnumerable<Category>> GetByIdAsync(int id, bool trackChanges)
+    public Task<IEnumerable<Category>> GetByIdAsync(Guid id, bool trackChanges)
     => FindByCondition(c => c.CategoryId == id, trackChanges)
         .ToListAsync()
         .ContinueWith(t => (IEnumerable<Category>)t.Result);

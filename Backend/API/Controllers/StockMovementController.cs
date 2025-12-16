@@ -25,7 +25,7 @@ public class StockMovementController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetStockMovement(int id)
+    public async Task<IActionResult> GetStockMovement(Guid id)
     {
         var stockMovement = await _repository.StockMovement.GetStockMovementAsync(id, trackChanges: false);
         if (stockMovement == null)

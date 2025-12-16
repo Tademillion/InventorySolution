@@ -24,7 +24,7 @@ public class InvoiceController : ControllerBase
     }
     //  get by id
     [HttpGet("{id}", Name = "GetInvoiceById")]
-    public async Task<IActionResult> GetInvoiceById(int id)
+    public async Task<IActionResult> GetInvoiceById(Guid id)
     {
         var invoice = await _repository.Invoice.GetInvoiceAsync(id, trackChanges: false);
         if (invoice == null)

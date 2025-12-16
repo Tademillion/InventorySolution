@@ -25,7 +25,7 @@ public class CustomerController:ControllerBase
     }
 
     [HttpGet("{id}", Name = "GetCustomerById")]
-    public async Task<IActionResult> GetCustomerById(int id)
+    public async Task<IActionResult> GetCustomerById(Guid id)
     {
         var customer = await _repository.Customer.GetCustomerAsync(id, trackChanges: false);
         if (customer == null)

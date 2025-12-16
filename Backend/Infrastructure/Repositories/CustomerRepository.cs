@@ -12,11 +12,11 @@ public class CustomerRepository: RepositoryBase<Customer>, ICustomerRepository
         .OrderBy(c => c.Name)
         .ToListAsync();
 
-    public async Task<Customer> GetCustomerAsync(int customerId, bool trackChanges) =>
+    public async Task<Customer> GetCustomerAsync(Guid customerId, bool trackChanges) =>
         await FindByCondition(c => c.CustomerId.Equals(customerId), trackChanges)
         .SingleOrDefaultAsync();
 
-    public async Task<IEnumerable<Customer>> GetByIdAsync(int ids, bool trackChanges)=>
+    public async Task<IEnumerable<Customer>> GetByIdAsync(Guid ids, bool trackChanges)=>
         await FindByCondition(c => c.CustomerId == ids, trackChanges)
         .ToListAsync(); 
         public void CreateCustomer(Customer customer) => Create(customer); 

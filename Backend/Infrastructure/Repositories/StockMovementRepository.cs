@@ -12,9 +12,9 @@ public class StockMovementRepository : RepositoryBase<StockMovement>, IStockMove
     public async Task<IEnumerable<StockMovement>> GetAllStockMovementsAsync(bool trackChanges) => await FindAll(trackChanges)
         .ToListAsync();
 
-    public async Task<IEnumerable<StockMovement>> GetByIdAsync(int ids, bool trackChanges) => await FindByCondition(s => s.StockMovementId == ids, trackChanges)
+    public async Task<IEnumerable<StockMovement>> GetByIdAsync(Guid ids, bool trackChanges) => await FindByCondition(s => s.StockMovementId == ids, trackChanges)
         .ToListAsync();
 
-    public async Task<StockMovement> GetStockMovementAsync(int stockMovementId, bool trackChanges) => await FindByCondition(s => s.StockMovementId == stockMovementId, trackChanges)
+    public async Task<StockMovement> GetStockMovementAsync(Guid stockMovementId, bool trackChanges) => await FindByCondition(s => s.StockMovementId == stockMovementId, trackChanges)
         .FirstOrDefaultAsync();
 }

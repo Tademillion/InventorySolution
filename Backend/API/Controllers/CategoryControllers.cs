@@ -24,7 +24,7 @@ public class CategoryController : ControllerBase
     }
     //  category by dto
     [HttpGet("{id}", Name = "GetCategoryById")]
-    public async Task<IActionResult> GetCategoryById(int id)
+    public async Task<IActionResult> GetCategoryById(Guid id)
     {
         var category = await _repository.Category.GetByIdAsync(id, trackChanges: false);
         if (category == null)
