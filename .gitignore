@@ -47,7 +47,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+FrontEnd/next-env.d.ts
 .next/
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

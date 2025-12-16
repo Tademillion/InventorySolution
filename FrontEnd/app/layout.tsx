@@ -19,20 +19,20 @@ export const metadata: Metadata = {
   keywords: ["inventory management", "stock control", "warehouse management", "supply chain", "enterprise software"],
   authors: [{ name: "InventoryPro Team" }],
   icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
+    // icon: [
+    //   {
+    //     url: "/icon-light-32x32.png",
+    //     media: "(prefers-color-scheme: light)",
+    //   },
+    //   {
+    //     url: "/icon-dark-32x32.png",
+    //     media: "(prefers-color-scheme: dark)",
+    //   },
+    //   {
+    //     url: "/icon.svg",
+    //     type: "image/svg+xml",
+    //   },
+    // ],
     apple: "/apple-icon.png",
   },
 }
@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body className={`font-sans antialiased`} suppressHydrationWarning={true}>
         <AuthProvider>{children}</AuthProvider>
         <Analytics />
