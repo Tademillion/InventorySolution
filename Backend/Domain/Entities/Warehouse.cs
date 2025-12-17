@@ -7,6 +7,13 @@ public class Warehouse
 
     [Required, MaxLength(20)]
     public string Code { get; set; } = default!;
+       public void AssignCode(string code)
+{
+    if (!string.IsNullOrWhiteSpace(Code))
+        throw new InvalidOperationException("Code already assigned");
+
+    Code = code;
+}
 
     [Required, MaxLength(150)]
     public string Name { get; set; } = default!;
