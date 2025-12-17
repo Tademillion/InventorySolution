@@ -24,6 +24,10 @@ export default function WarehousesPage() {
        }
       setEditingWarehouse(undefined)
     }
+     const handleAddNew = () => {
+    setEditingWarehouse(undefined)
+    setDialogOpen(true)
+  }
   return (
     <div className="page-container section-spacing">
       <div className="flex items-center justify-between">
@@ -31,7 +35,7 @@ export default function WarehousesPage() {
           <h1 className="text-3xl font-bold tracking-tight">Warehouses</h1>
           <p className="text-muted-foreground">Manage warehouse locations and capacity</p>
         </div>
-        <Button>
+        <Button onClick={handleAddNew}>
           <Plus className="h-4 w-4 mr-2" />
           Add Warehouse
         </Button>
@@ -108,11 +112,7 @@ export default function WarehousesPage() {
           )
         })}
       </div>
-      <WarehouseDialog open={false} onOpenChange={function (open: boolean): void {
-        throw new Error("Function not implemented.")
-      } } onSave={function (warehouse: Partial<WarehouseProp>): void {
-        throw new Error("Function not implemented.")
-      } } />
+      <WarehouseDialog open={dialogOpen} onOpenChange={setDialogOpen} onSave={handleSave} />
     </div>
           // <CategoryDialog open={dialogOpen} onOpenChange={setDialogOpen} category={editingCategory} onSave={handleSave} />
     

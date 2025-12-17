@@ -14,13 +14,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Warehouse } from "@/lib/types"
- 
+import { WarehouseProp } from "@/lib/types"
+  
 interface WarehouseDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  warehouse?: Warehouse
-  onSave: (warehouse: Partial<Warehouse>) => void
+  warehouse?: WarehouseProp
+  onSave: (warehouse: Partial<WarehouseProp>) => void
 }
 
 export function WarehouseDialog({
@@ -29,10 +29,10 @@ export function WarehouseDialog({
   warehouse,
   onSave,
 }: WarehouseDialogProps) {
-  const [formData, setFormData] = useState<Partial<Warehouse>>({
+  const [formData, setFormData] = useState<Partial<WarehouseProp>>({
     name: "",
     code: "",
-    location: "",
+    address: "",
     description: "",
     isActive: true,
   })
@@ -97,9 +97,9 @@ export function WarehouseDialog({
               <Label htmlFor="location">Location</Label>
               <Input
                 id="location"
-                value={formData.location}
+                value={formData.address}
                 onChange={(e) =>
-                  setFormData({ ...formData, location: e.target.value })
+                  setFormData({ ...formData, address: e.target.value })
                 }
                 placeholder="Addis Ababa"
               />

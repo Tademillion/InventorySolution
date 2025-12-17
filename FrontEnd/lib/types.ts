@@ -274,7 +274,8 @@ export interface WarehouseProp {
   managerId?: string
   managerName?: string
   isActive: boolean
-  capacity?: number
+  capacity?: number,
+  description?: string
   currentUtilization?: number
   createdAt: Date
   updatedAt: Date
