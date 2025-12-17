@@ -24,7 +24,10 @@ public class Warehouse
     public string? Country { get; set; }
 
     public bool IsActive { get; set; } = true;
-
+    public int? Capacity { get; set; }
+    public string? ManagerId { get; set; }
+    public string? ManagerName { get; set; }
+    public int? CurrentUtilization { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
