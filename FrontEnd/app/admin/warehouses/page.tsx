@@ -8,18 +8,20 @@ import { Warehouse, MapPin, Package, Plus } from "lucide-react"
 import { WarehouseDialog } from "@/components/warehouse-dialog"
  import { useState } from "react"
 import {  WarehouseProp } from "@/lib/types"
+import { useWareHouse } from "@/hooks/UseWareHouse"
 
 export default function WarehousesPage() {
     const [dialogOpen, setDialogOpen] = useState(false)
       const [editingWarehouse, setEditingWarehouse] = useState<WarehouseProp | undefined>()
-    
+     const {warehouses,addWareHouse}= useWareHouse()
     const handleSave = (warehouseData: Partial<WarehouseProp>) => {
       if (editingWarehouse) {
-        // addCategory(editingWarehouse as WarehouseProp)
-        console.log("Updating category:", warehouseData)
+       // addWareHouse({ ...editingWarehouse, ...warehouseData } as WarehouseProp)
+        console.log("Updating warehouse:", warehouseData)
         // setCategories(categories.map((c) => (c.id === editingCategory.id ? { ...c, ...categoryData } : c)))
       } else { 
-         console.log("Creating category:", warehouseData)
+        addWareHouse(warehouseData as WarehouseProp)
+         console.log("Creating warehouse:", warehouseData)
         // setCategories([...categories, warehouseData as Category])
        }
       setEditingWarehouse(undefined)
@@ -42,7 +44,7 @@ export default function WarehousesPage() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {MOCK_WAREHOUSES.map((warehouse) => {
+        {warehouses.map((warehouse) => {
           const productsInWarehouse = MOCK_PRODUCTS.filter((p) => p.warehouseId === warehouse.id)
           const utilizationPercent = warehouse.capacity
             ? ((warehouse.currentUtilization || 0) / warehouse.capacity) * 100
@@ -114,7 +116,6 @@ export default function WarehousesPage() {
       </div>
       <WarehouseDialog open={dialogOpen} onOpenChange={setDialogOpen} onSave={handleSave} />
     </div>
-          // <CategoryDialog open={dialogOpen} onOpenChange={setDialogOpen} category={editingCategory} onSave={handleSave} />
-    
+     
   )
 }
