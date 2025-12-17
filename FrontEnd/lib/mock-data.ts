@@ -5,13 +5,13 @@ import type {
   Customer,
   Invoice,
   StockMovement,
-  AIInsight,
-  Warehouse,
+  AIInsight, 
   Batch,
   AuditLog,
+  WarehouseProp,
 } from "./types"
 
-export const MOCK_WAREHOUSES: Warehouse[] = [
+export const MOCK_WAREHOUSES: WarehouseProp[] = [
   {
     id: "1",
     name: "Main Warehouse",
@@ -769,3 +769,5 @@ export const MOCK_AUDIT_LOGS: AuditLog[] = [
     createdAt: new Date("2024-02-22T16:45:00"),
   },
 ]
+// 
+ 

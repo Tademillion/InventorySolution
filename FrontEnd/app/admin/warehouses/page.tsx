@@ -5,8 +5,25 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { MOCK_WAREHOUSES, MOCK_PRODUCTS } from "@/lib/mock-data"
 import { Warehouse, MapPin, Package, Plus } from "lucide-react"
+import { WarehouseDialog } from "@/components/warehouse-dialog"
+ import { useState } from "react"
+import {  WarehouseProp } from "@/lib/types"
 
 export default function WarehousesPage() {
+    const [dialogOpen, setDialogOpen] = useState(false)
+      const [editingWarehouse, setEditingWarehouse] = useState<WarehouseProp | undefined>()
+    
+    const handleSave = (warehouseData: Partial<WarehouseProp>) => {
+      if (editingWarehouse) {
+        // addCategory(editingWarehouse as WarehouseProp)
+        console.log("Updating category:", warehouseData)
+        // setCategories(categories.map((c) => (c.id === editingCategory.id ? { ...c, ...categoryData } : c)))
+      } else { 
+         console.log("Creating category:", warehouseData)
+        // setCategories([...categories, warehouseData as Category])
+       }
+      setEditingWarehouse(undefined)
+    }
   return (
     <div className="page-container section-spacing">
       <div className="flex items-center justify-between">
@@ -40,7 +57,7 @@ export default function WarehousesPage() {
                       <CardDescription className="text-xs">{warehouse.code}</CardDescription>
                     </div>
                   </div>
-                  <Badge variant={warehouse.isActive ? "success" : "secondary"}>
+                  <Badge variant={warehouse.isActive ? "outline" : "secondary"}>
                     {warehouse.isActive ? "Active" : "Inactive"}
                   </Badge>
                 </div>
@@ -91,6 +108,13 @@ export default function WarehousesPage() {
           )
         })}
       </div>
+      <WarehouseDialog open={false} onOpenChange={function (open: boolean): void {
+        throw new Error("Function not implemented.")
+      } } onSave={function (warehouse: Partial<WarehouseProp>): void {
+        throw new Error("Function not implemented.")
+      } } />
     </div>
+          // <CategoryDialog open={dialogOpen} onOpenChange={setDialogOpen} category={editingCategory} onSave={handleSave} />
+    
   )
 }

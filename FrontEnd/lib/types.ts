@@ -262,7 +262,7 @@ export type EntityType =
   | "batch"
   | "settings"
 
-export interface Warehouse {
+export interface WarehouseProp {
   id: string
   name: string
   code: string
@@ -296,3 +296,6 @@ export interface Batch {
   createdAt: Date
   updatedAt: Date
 }
+//  warehouse 
+
+
