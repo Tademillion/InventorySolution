@@ -7,11 +7,13 @@ public class WarehouseController : ControllerBase
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
-
-    public WarehouseController(IRepositoryManager repository, IMapper mapper)
+    private ILogger<WarehouseController> _logger;
+    
+    public WarehouseController(IRepositoryManager repository, IMapper mapper, ILogger<WarehouseController> logger)
     {
         _repository = repository;
         _mapper = mapper;
+        _logger = logger;
     }
 
     // Controller actions go here
@@ -39,7 +41,12 @@ public class WarehouseController : ControllerBase
     public async Task<IActionResult> CreateWarehouse([FromBody] WareHouseCreationDto warehouseCreationDto)
     {
         var warehouseEntity = _mapper.Map<Warehouse>(warehouseCreationDto);
-        _repository.Warehouse.AddAsync(warehouseEntity);
+    //     before that generate code
+        var generatedCode = await _repository.WarehouseCodeGenerator.GenerateAsync(warehouseCreationDto.Address);
+        warehouseEntity.AssignCode(generatedCode);
+        _logger.LogInformation($"Generated warehouse code: {generatedCode}");
+
+         _repository.Warehouse.AddAsync(warehouseEntity);
         await _repository.SaveAsync();
 
         var warehouseToReturn = _mapper.Map<WareHouseDto>(warehouseEntity);

@@ -8,6 +8,7 @@ public class RepositoryManager : IRepositoryManager
     private ICustomerRepository _customerRepository;
     private IStockMovementRepository _stockMovementRepository;
     private IWareHouseRepository _warehouseRepository;
+    private IWarehouseCodeGenerator _warehouseCodeGenerator;
      public RepositoryManager(ApplicationDBContext context)
     {
         _context = context;
@@ -84,6 +85,9 @@ public IStockMovementRepository StockMovement
             return _warehouseRepository;
         }
     }
+
+    public IWarehouseCodeGenerator WarehouseCodeGenerator => _warehouseCodeGenerator ??= new WarehouseCodeGenerator(_context);
+
     public async Task SaveAsync()
     {
         await _context.SaveChangesAsync();
