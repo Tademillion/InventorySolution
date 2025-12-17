@@ -7,6 +7,7 @@ public class RepositoryManager : IRepositoryManager
     private IInvoiceRepository _invoiceRepository;
     private ICustomerRepository _customerRepository;
     private IStockMovementRepository _stockMovementRepository;
+    private IWareHouseRepository _warehouseRepository;
      public RepositoryManager(ApplicationDBContext context)
     {
         _context = context;
@@ -43,7 +44,7 @@ public class RepositoryManager : IRepositoryManager
             return _categoryRepository;
         }
     }
-
+// 
     public IInvoiceRepository Invoice 
     {
         get
@@ -73,7 +74,16 @@ public IStockMovementRepository StockMovement
             return _stockMovementRepository;
         }
     }
-    
+    // 
+    public IWareHouseRepository Warehouse
+    {
+        get
+        {
+            if (_warehouseRepository == null)
+                _warehouseRepository = new WareHouseRepository(_context);
+            return _warehouseRepository;
+        }
+    }
     public async Task SaveAsync()
     {
         await _context.SaveChangesAsync();

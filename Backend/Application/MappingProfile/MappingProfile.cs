@@ -1,4 +1,5 @@
 using AutoMapper;
+using InventorySystemSolution.Migrations;
 
 public class MappingProfile : Profile
 {
@@ -42,7 +43,10 @@ public class MappingProfile : Profile
         CreateMap<StockMovement, StockMovementDto>();
         CreateMap<CreateStockMovementDto, StockMovement>();
         CreateMap<UpdateStockMovementDto, StockMovement>();
-
+        // warehouse
+        CreateMap<Warehouse, WareHouseDto>();
+        CreateMap<WareHouseCreationDto, Warehouse>();
+//  
      }
 
 }

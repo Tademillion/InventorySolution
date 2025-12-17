@@ -6,5 +6,6 @@ public interface IRepositoryManager
         public IInvoiceRepository Invoice { get; }
         public ICustomerRepository Customer { get; }
         public IStockMovementRepository StockMovement { get; }
+        public IWareHouseRepository Warehouse { get; }
           Task SaveAsync();
 }
