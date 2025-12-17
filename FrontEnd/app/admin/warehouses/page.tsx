@@ -16,14 +16,9 @@ export default function WarehousesPage() {
      const {warehouses,addWareHouse}= useWareHouse()
     const handleSave = (warehouseData: Partial<WarehouseProp>) => {
       if (editingWarehouse) {
-       // addWareHouse({ ...editingWarehouse, ...warehouseData } as WarehouseProp)
-        console.log("Updating warehouse:", warehouseData)
-        // setCategories(categories.map((c) => (c.id === editingCategory.id ? { ...c, ...categoryData } : c)))
-      } else { 
+        } else { 
         addWareHouse(warehouseData as WarehouseProp)
-         console.log("Creating warehouse:", warehouseData)
-        // setCategories([...categories, warehouseData as Category])
-       }
+         }
       setEditingWarehouse(undefined)
     }
      const handleAddNew = () => {
