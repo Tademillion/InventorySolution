@@ -120,7 +120,7 @@ export default function ProductsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Products</h2>
+          <h2 className="text-3xl font-bold tracking-tight">Stock</h2>
           <p className="text-muted-foreground">Manage your product catalog</p>
         </div>
         <Button onClick={handleAddNew}>

@@ -36,6 +36,7 @@ import { BRAND } from "@/lib/constants"
 
 const adminMenuItems = [
   { title: "Dashboard", icon: LayoutDashboard, href: "/admin" },
+  { title: "Stock Management", icon: Package, href: "/admin/stock" },
   { title: "Products", icon: Package, href: "/admin/products" },
   { title: "Categories", icon: FolderTree, href: "/admin/categories" },
   { title: "Warehouses", icon: Warehouse, href: "/admin/warehouses" },
