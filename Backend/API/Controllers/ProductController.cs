@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,21 +9,22 @@ public class ProductController:ControllerBase
  
  private readonly  IRepositoryManager _repository;
  private ILogger<ProductController> _logger;
+ private readonly ISkuGenerator _generator;
    
    private IMapper _mapper;
- public ProductController(IRepositoryManager repository,ILogger<ProductController> logger,IMapper mapper)
+ public ProductController(IRepositoryManager repository,ILogger<ProductController> logger,IMapper mapper,ISkuGenerator generator)
  {
      _repository = repository;
      _logger=logger;
      _mapper=mapper;
-     
+     _generator=generator;
  }
 //   get all  products 
     [HttpGet]
-    public IActionResult GetProducts()
+    public async Task<IActionResult> GetProducts()
     {
         
-         var product= _repository.Product.GetAllProductsAsync(false);
+         var product= await _repository.Product.GetAllProductsAsync(false);
         return Ok(product);
     }
     //  get  the Products by id only
@@ -39,7 +41,9 @@ public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto produ
     {
         var productEntity= _mapper.Map<Product>(product);
         _repository.Product.CreateProduct(productEntity);
-        
+        //  assign the SKu
+         var Sku=_generator.Generate(productEntity);
+         productEntity.AssignSku(Sku);
     var productToReturn = _mapper.Map<ProductInventoryDto>(productEntity);
     return CreatedAtRoute("GetProductById", new { id = productToReturn.ProductId }, productToReturn); 
     }

@@ -8,6 +8,8 @@ builder.Services.AddOpenApi();
 // mapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 // builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//  interface register
+builder.Services.AddScoped<ISkuGenerator,SkuGenerator>();
 //  cors policy
  builder.Services.ConfigureCors();
 // Di

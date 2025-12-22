@@ -37,10 +37,10 @@ public class CreateProductInventoryDto
     public int StockQuantity { get; set; }
 
     [Required]
-    public int CategoryId { get; set; }
+    public Guid CategoryId { get; set; }
 
     [Required]
-    public int SupplierId { get; set; }
+    public Guid SupplierId { get; set; }
 }
 
 public class UpdateProductInventoryDto
