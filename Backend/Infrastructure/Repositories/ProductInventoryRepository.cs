@@ -1,9 +1,9 @@
 
 using Microsoft.EntityFrameworkCore;
 
-public class ProductRepository : RepositoryBase<ProductInventory>, IProductInventoryRepository
+public class ProductInventoryRepository : RepositoryBase<ProductInventory>, IProductInventoryRepository
 {
-    public ProductRepository(ApplicationDBContext context) : base(context)
+    public ProductInventoryRepository(ApplicationDBContext context) : base(context)
     {
     }
 

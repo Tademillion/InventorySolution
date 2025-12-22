@@ -1,7 +1,7 @@
 public class RepositoryManager : IRepositoryManager
 {
     private readonly ApplicationDBContext _context;
-    private IProductInventoryRepository _productRepository;
+    private IProductInventoryRepository _productInventoryRepository;
     private ISupplierRepository _supplierRepository;
     private ICategoryRepository _categoryRepository;
     private IInvoiceRepository _invoiceRepository;
@@ -9,23 +9,33 @@ public class RepositoryManager : IRepositoryManager
     private IStockMovementRepository _stockMovementRepository;
     private IWareHouseRepository _warehouseRepository;
     private IWarehouseCodeGenerator _warehouseCodeGenerator;
+    private IProductRepository  _productRepository;
      public RepositoryManager(ApplicationDBContext context)
     {
         _context = context;
     }
 
-    public IProductInventoryRepository Product
+    public IProductInventoryRepository ProductInventory
     {
 
         get
         {
             if(_productRepository == null) 
+                _productInventoryRepository = new ProductInventoryRepository(_context);
+            
+            return _productInventoryRepository;
+        }
+    }
+public IProductRepository Product
+    {
+        get
+        {
+             if(_productRepository == null) 
                 _productRepository = new ProductRepository(_context);
             
             return _productRepository;
         }
     }
-
     public ISupplierRepository Supplier {
        get
         {
