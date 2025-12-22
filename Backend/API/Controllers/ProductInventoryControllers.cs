@@ -1,16 +1,16 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
-[Route("api/products")]
+[Route("api/productinventory")]
 [ApiController]
 
-public class PoductControllers : ControllerBase
+public class PoductInventoryController : ControllerBase
 {
- private  readonly ILogger<PoductControllers> _logger;
+ private  readonly ILogger<PoductInventoryController> _logger;
  private readonly IRepositoryManager _repository;
  private readonly IMapper _mapper;
   
- public PoductControllers(ILogger<PoductControllers> logger, IRepositoryManager repository, IMapper mapper)
+ public PoductInventoryController(ILogger<PoductInventoryController> logger, IRepositoryManager repository, IMapper mapper)
  {
     _logger = logger;
     _repository = repository;
@@ -18,16 +18,16 @@ public class PoductControllers : ControllerBase
  }
 
 [HttpGet]
-public async Task<IActionResult> GetAllProducts()
+public async Task<IActionResult> GetAllProductInventories()
 {
-    var products = await _repository.Product.GetAllProductInventoryAsync(trackChanges: false);
+    var products = await _repository.ProductInventory.GetAllProductInventoryAsync(trackChanges: false);
     return Ok(products);
 
 } 
-[HttpGet("{id}", Name = "GetProductById")]
-public async Task<IActionResult> GetProductById(Guid id)
+[HttpGet("{id}", Name = "GetProductInventoryById")]
+public async Task<IActionResult> GetProductInventoryById(Guid id)
 {
-    var product = await _repository.Product.GetByIdsAsync(id, trackChanges: false);
+    var product = await _repository.ProductInventory.GetByIdsAsync(id, trackChanges: false);
     if (product == null)
     {
         return NotFound();
@@ -36,12 +36,12 @@ public async Task<IActionResult> GetProductById(Guid id)
 }
 //  post
 [HttpPost]
-public async Task<IActionResult> CreateProduct([FromBody] CreateProductInventoryDto productInventoryDto)
+public async Task<IActionResult> CreateProductInventory([FromBody] CreateProductInventoryDto productInventoryDto)
 {
     var productEntity = _mapper.Map<ProductInventory>(productInventoryDto);
-    _repository.Product.CreateProductInventory(productEntity);
+    _repository.ProductInventory.CreateProductInventory(productEntity);
     await _repository.SaveAsync();
     var productToReturn = _mapper.Map<ProductInventoryDto>(productEntity);
-    return CreatedAtRoute("GetProductById", new { id = productToReturn.ProductId }, productToReturn); 
+    return CreatedAtRoute("GetProductInventoryById", new { id = productToReturn.ProductId }, productToReturn); 
 }
 }

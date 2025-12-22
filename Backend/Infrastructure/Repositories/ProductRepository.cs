@@ -1,27 +1,23 @@
 
-public class ProductRepository  :RepositoryBase<ProductInventory> , IProductRepository
+
+using Microsoft.EntityFrameworkCore;
+
+public class ProductRepository  :RepositoryBase<Product> , IProductRepository
 {
     public ProductRepository(ApplicationDBContext context) : base(context)
     {
     }
 
-    public void CreateProduct(Product product)
-    {
-        throw new NotImplementedException();
-    }
+    public void CreateProduct(Product product)=>Create(product);
 
-    public void DeleteProduct(Product product)
-    {
-        throw new NotImplementedException();
-    }
+    public void DeleteProduct(Product product)=>
+    Delete(product);
+    public async Task<IEnumerable<Product>> GetAllProductsAsync(bool trackChanges)=>
+      await  FindAll(trackChanges).ToListAsync(); 
 
-    public Task<IEnumerable<ProductInventoryDto>> GetAllProductsAsync(bool trackChanges)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<Product> GetProductByIdAsync(Guid Id, bool trackChanges)=>
+     await FindByCondition(x=>x.Id.Equals(Id),trackChanges)
+     .SingleOrDefaultAsync();
 
-    public Task<ProductInventoryDto> GetProductByIdAsync(Guid productId, bool trackChanges)
-    {
-        throw new NotImplementedException();
-    }
+    
 }
