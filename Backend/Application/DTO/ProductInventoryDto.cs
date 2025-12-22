@@ -1,0 +1,84 @@
+using System.ComponentModel.DataAnnotations;
+
+public class ProductInventoryDto
+{
+    public int ProductId { get; set; }
+
+    public string Name { get; set; }
+
+    public string? Description { get; set; }
+
+    public decimal Price { get; set; }
+
+    public int StockQuantity { get; set; }
+
+    public int CategoryId { get; set; }
+    public string CategoryName { get; set; }
+
+    public int SupplierId { get; set; }
+    public string SupplierName { get; set; }
+}
+
+
+public class CreateProductInventoryDto
+{
+    [Required, MaxLength(150)]
+    public string Name { get; set; }
+
+    [MaxLength(250)]
+    public string? Description { get; set; }
+
+    [Required]
+    [Range(0, 999999)]
+    public decimal Price { get; set; }
+
+    [Required]
+    [Range(0, int.MaxValue)]
+    public int StockQuantity { get; set; }
+
+    [Required]
+    public int CategoryId { get; set; }
+
+    [Required]
+    public int SupplierId { get; set; }
+}
+
+public class UpdateProductInventoryDto
+{
+    [Required, MaxLength(150)]
+    public string Name { get; set; }
+
+    [MaxLength(250)]
+    public string? Description { get; set; }
+
+    [Required]
+    [Range(0, 999999)]
+    public decimal Price { get; set; }
+
+    [Required]
+    [Range(0, int.MaxValue)]
+    public int StockQuantity { get; set; }
+
+    [Required]
+    public int CategoryId { get; set; }
+
+    [Required]
+    public int SupplierId { get; set; }
+}
+// 
+public class ProductInventoryListDto
+{
+    public int ProductId { get; set; }
+
+    public string Name { get; set; }
+
+    public decimal Price { get; set; }
+
+    public int StockQuantity { get; set; }
+
+    public string CategoryName { get; set; }
+
+    public string SupplierName { get; set; }
+}
+
+

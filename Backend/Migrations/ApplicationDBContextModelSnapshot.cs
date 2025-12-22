@@ -44,7 +44,7 @@ namespace InventorySystemSolution.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Customer", b =>
@@ -72,7 +72,7 @@ namespace InventorySystemSolution.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("Invoice", b =>
@@ -94,7 +94,7 @@ namespace InventorySystemSolution.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("Invoices", (string)null);
                 });
 
             modelBuilder.Entity("InvoiceItem", b =>
@@ -124,7 +124,7 @@ namespace InventorySystemSolution.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("InvoiceItems");
+                    b.ToTable("InvoiceItems", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -357,7 +357,7 @@ namespace InventorySystemSolution.Migrations
 
                     b.HasIndex("WarehouseId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("SkuRule", b =>
@@ -383,7 +383,7 @@ namespace InventorySystemSolution.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SkuRules");
+                    b.ToTable("SkuRules", (string)null);
                 });
 
             modelBuilder.Entity("StockMovement", b =>
@@ -419,7 +419,7 @@ namespace InventorySystemSolution.Migrations
 
                     b.HasIndex("WarehouseId");
 
-                    b.ToTable("StockMovements");
+                    b.ToTable("StockMovements", (string)null);
                 });
 
             modelBuilder.Entity("Supplier", b =>
@@ -447,7 +447,7 @@ namespace InventorySystemSolution.Migrations
 
                     b.HasKey("SupplierId");
 
-                    b.ToTable("Suppliers");
+                    b.ToTable("Suppliers", (string)null);
                 });
 
             modelBuilder.Entity("User", b =>
@@ -578,7 +578,7 @@ namespace InventorySystemSolution.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Warehouses");
+                    b.ToTable("Warehouses", (string)null);
                 });
 
             modelBuilder.Entity("Invoice", b =>

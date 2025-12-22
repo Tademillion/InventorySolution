@@ -7,22 +7,26 @@ public class MappingProfile : Profile
     {
         
         CreateMap<UserForRegistrationDto, User>();
-        //  Product
-        CreateMap<Product, ProductDto>()
+        //  ProductInventory
+        CreateMap<ProductInventory, ProductInventoryDto>()
             .ForMember(dest => dest.CategoryName, 
                        opt => opt.MapFrom(src => src.Category.Name))
             .ForMember(dest => dest.SupplierName, 
                        opt => opt.MapFrom(src => src.Supplier.Name));
                     //     create Product
-        CreateMap<CreateProductDto, Product>();
+        CreateMap<CreateProductInventoryDto, ProductInventory>();
         //     update Product
-           CreateMap<UpdateProductDto, Product>()
+           CreateMap<UpdateProductInventoryDto, ProductInventory>()
             .ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));        //   list Product
-        CreateMap<Product, ProductListDto>()
+        CreateMap<ProductInventory, ProductInventoryListDto>()
             .ForMember(dest => dest.CategoryName, 
                        opt => opt.MapFrom(src => src.Category.Name))
             .ForMember(dest => dest.SupplierName, 
                        opt => opt.MapFrom(src => src.Supplier.Name));
+                    //     products
+        CreateMap<CreateProductDto, Product>();
+        CreateMap<UpdateProductDto, Product>();
+        CreateMap<Product, ProductResponseDto>();
                     //    Supplier
         CreateMap<SupplierUpdateDto, Supplier>();
         CreateMap<Supplier, SupplierDto>();

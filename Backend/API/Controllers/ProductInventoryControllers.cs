@@ -20,7 +20,7 @@ public class PoductControllers : ControllerBase
 [HttpGet]
 public async Task<IActionResult> GetAllProducts()
 {
-    var products = await _repository.Product.GetAllProductsAsync(trackChanges: false);
+    var products = await _repository.Product.GetAllProductInventoryAsync(trackChanges: false);
     return Ok(products);
 
 } 
@@ -36,12 +36,12 @@ public async Task<IActionResult> GetProductById(Guid id)
 }
 //  post
 [HttpPost]
-public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto createProductDto)
+public async Task<IActionResult> CreateProduct([FromBody] CreateProductInventoryDto productInventoryDto)
 {
-    var productEntity = _mapper.Map<Product>(createProductDto);
-    _repository.Product.CreateProduct(productEntity);
+    var productEntity = _mapper.Map<ProductInventory>(productInventoryDto);
+    _repository.Product.CreateProductInventory(productEntity);
     await _repository.SaveAsync();
-    var productToReturn = _mapper.Map<ProductDto>(productEntity);
+    var productToReturn = _mapper.Map<ProductInventoryDto>(productEntity);
     return CreatedAtRoute("GetProductById", new { id = productToReturn.ProductId }, productToReturn); 
 }
 }

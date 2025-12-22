@@ -1,6 +1,6 @@
 public interface IRepositoryManager
 {
-        public IProductRepository Product { get; }
+        public IProductInventoryRepository Product { get; }
         public ISupplierRepository Supplier { get; }
         public ICategoryRepository Category { get; }
         public IInvoiceRepository Invoice { get; }

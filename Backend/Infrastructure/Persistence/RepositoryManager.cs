@@ -1,7 +1,7 @@
 public class RepositoryManager : IRepositoryManager
 {
     private readonly ApplicationDBContext _context;
-    private IProductRepository _productRepository;
+    private IProductInventoryRepository _productRepository;
     private ISupplierRepository _supplierRepository;
     private ICategoryRepository _categoryRepository;
     private IInvoiceRepository _invoiceRepository;
@@ -14,7 +14,7 @@ public class RepositoryManager : IRepositoryManager
         _context = context;
     }
 
-    public IProductRepository Product
+    public IProductInventoryRepository Product
     {
 
         get
