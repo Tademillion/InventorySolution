@@ -3,12 +3,14 @@
 import { DataTable } from "@/components/data-table"
 import { SupplierDialog } from "@/components/supplier-dialog"
 import { Button } from "@/components/ui/button"
+import { useSupplier } from "@/hooks/useSupplier"
 import { MOCK_SUPPLIERS } from "@/lib/mock-data"
-import { Supplier } from "@/lib/types"
-import { Plus } from "lucide-react"
+import { Supplier } from "@/Types/supplier"
+ import { Plus } from "lucide-react"
 import { useState } from "react"
  
 export default function SuppliersPage() {
+   const {addSupplier,suppliers}=    useSupplier();
   const columns = [
     {
       header: "Supplier Name",
@@ -34,6 +36,9 @@ const handleAddNew = () => {
     // setEditingWarehouse(undefined)
     setDialogOpen(true)
   }
+  const handleOnSave=(data:Supplier)=>{
+addSupplier(data);
+  }
   return (
     <div className="space-y-6">
       <div>
@@ -50,10 +55,8 @@ const handleAddNew = () => {
        
       </div>
 
-      <DataTable data={MOCK_SUPPLIERS} columns={columns} searchKey="name" searchPlaceholder="Search suppliers..." />
-      <SupplierDialog open={dialogOpen} onOpenChange={setDialogOpen} onSave={function (supplier: Partial<Supplier>): void {
-        throw new Error("Function not implemented.")
-      } }/>
+      <DataTable data={suppliers} columns={columns} searchKey="name" searchPlaceholder="Search suppliers..." />
+      <SupplierDialog open={dialogOpen} onOpenChange={setDialogOpen} onSave={handleOnSave}/>
     </div>
   )
 }

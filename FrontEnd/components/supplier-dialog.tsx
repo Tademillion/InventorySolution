@@ -15,13 +15,13 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Supplier } from "@/lib/types"
- 
+import { Supplier } from "@/Types/supplier"
+  
 interface SupplierDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   supplier?: Supplier
-  onSave: (supplier: Partial<Supplier>) => void
+  onSave: (supplier: Supplier) => void
 }
 
 export function SupplierDialog({
@@ -30,20 +30,12 @@ export function SupplierDialog({
   supplier,
   onSave,
 }: SupplierDialogProps) {
-  const [formData, setFormData] = useState<Partial<Supplier>>({
-    name: "",
-    code: "",
+  const [formData, setFormData] = useState<Supplier>({
+    name: "", 
     email: "",
     phone: "",
-    address: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    country: "",
-    contactPerson: "",
-    paymentTerms: "Net 30",
-    rating: 5,
-    isActive: true,
+    address: "", 
+    isActive: true, 
   })
 
   useEffect(() => {
@@ -51,18 +43,10 @@ export function SupplierDialog({
       setFormData(supplier)
     } else {
       setFormData({
-        name: "",
-        code: "",
+        name: "", 
         email: "",
         phone: "",
-        address: "",
-        city: "",
-        state: "",
-        zipCode: "",
-        country: "",
-        contactPerson: "",
-        paymentTerms: "Net 30",
-        rating: 5,
+        address: "", 
         isActive: true,
       })
     }
@@ -104,28 +88,6 @@ export function SupplierDialog({
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="code">Supplier Code</Label>
-                  <Input
-                    id="code"
-                    value={formData.code}
-                    onChange={(e) => setFormData({ ...formData, code: e.target.value })}
-                    placeholder="SUP-TECH-001"
-                  />
-                </div>
-              </div>
-
-              {/* Contact Info */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="contact">Contact Person</Label>
-                  <Input
-                    id="contact"
-                    value={formData.contactPerson || ""}
-                    onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
-                    placeholder="John Tech"
-                  />
-                </div>
-                <div className="grid gap-2">
                   <Label htmlFor="email">Email Address</Label>
                   <Input
                     id="email"
@@ -136,6 +98,8 @@ export function SupplierDialog({
                   />
                 </div>
               </div>
+
+             
 
               {/* Address Section */}
               <div className="grid gap-2">
@@ -153,64 +117,26 @@ export function SupplierDialog({
                   <Label htmlFor="city">City</Label>
                   <Input
                     id="city"
-                    value={formData.city || ""}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    placeholder="Silicon Valley"
+                      placeholder="Silicon Valley"
                   />
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="state">State</Label>
                   <Input
                     id="state"
-                    value={formData.state || ""}
-                    onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                    placeholder="CA"
+                     placeholder="CA"
                   />
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="zip">Zip Code</Label>
                   <Input
                     id="zip"
-                    value={formData.zipCode || ""}
-                    onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
-                    placeholder="94000"
+                     placeholder="94000"
                   />
                 </div>
               </div>
 
-              {/* Business Terms */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="paymentTerms">Payment Terms</Label>
-                  <Select 
-                    value={formData.paymentTerms} 
-                    onValueChange={(val) => setFormData({...formData, paymentTerms: val})}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select terms" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Net 15">Net 15</SelectItem>
-                      <SelectItem value="Net 30">Net 30</SelectItem>
-                      <SelectItem value="Net 60">Net 60</SelectItem>
-                      <SelectItem value="Due on Receipt">Due on Receipt</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="rating">Rating (1-5)</Label>
-                  <Input
-                    id="rating"
-                    type="number"
-                    step="0.1"
-                    min="0"
-                    max="5"
-                    value={formData.rating || ""}
-                    onChange={(e) => setFormData({ ...formData, rating: parseFloat(e.target.value) })}
-                    placeholder="4.5"
-                  />
-                </div>
-              </div>
+             
             </div>
           </ScrollArea>
 

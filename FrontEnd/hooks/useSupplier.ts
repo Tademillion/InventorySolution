@@ -1,6 +1,6 @@
-import { Supplier, WarehouseProp } from "@/lib/types";
-import { SupplierServices } from "@/Services/supplier.services";
+ import { SupplierServices } from "@/Services/supplier.services";
 import { WarehouseService } from "@/Services/warehouse.service";
+import { Supplier } from "@/Types/supplier";
 import { useEffect, useState } from "react";
 
 export function useSupplier() {

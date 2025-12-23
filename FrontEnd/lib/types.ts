@@ -41,23 +41,7 @@ export interface Category {
   isActive: boolean 
 }
 
-export interface Supplier {
-  id: string
-  name: string
-  code: string
-  email: string
-  phone: string
-  address: string
-  city: string
-  state: string
-  zipCode: string
-  country: string
-  contactPerson?: string
-  paymentTerms?: string
-  rating?: number
-  isActive: boolean
-  createdAt: Date
-}
+
 
 export interface Customer {
   id: string
