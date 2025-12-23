@@ -21,7 +21,8 @@ public class PoductInventoryController : ControllerBase
 public async Task<IActionResult> GetAllProductInventories()
 {
     var products = await _repository.ProductInventory.GetAllProductInventoryAsync(trackChanges: false);
-    return Ok(products);
+    var preoductEntity= _mapper.Map<List<ProductInventoryDto>>(products);
+     return Ok(preoductEntity);
 
 } 
 [HttpGet("{id}", Name = "GetProductInventoryById")]

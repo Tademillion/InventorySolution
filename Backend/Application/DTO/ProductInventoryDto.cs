@@ -4,19 +4,23 @@ public class ProductInventoryDto
 {
     public Guid ProductId { get; set; }
 
-    public string Name { get; set; }
+    public string ProductName { get; set; }
+    public  string CategoryName {get;set;}
 
     public string? Description { get; set; }
 
     public decimal Price { get; set; }
+    public decimal Cost {get;set;}
 
     public int StockQuantity { get; set; }
-
-    public Guid CategoryId { get; set; }
-    public string CategoryName { get; set; }
+ 
 
     public Guid SupplierId { get; set; }
     public string SupplierName { get; set; }
+ 
+    public Guid WareHouseId {get;set;}
+    public string WarehouseName {get;set;}
+    
 }
 
 
