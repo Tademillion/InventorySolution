@@ -25,7 +25,9 @@ public class ProductController:ControllerBase
     {
         
          var product= await _repository.Product.GetAllProductsAsync(false);
-        return Ok(product);
+           
+           var productEntity=_mapper.Map<List<ProductResponseDto>>(product);
+        return Ok(productEntity);
     }
     //  get  the Products by id only
 [HttpGet("{id}", Name = "GetProductById")]

@@ -13,7 +13,9 @@ public class ProductRepository  :RepositoryBase<Product> , IProductRepository
     public void DeleteProduct(Product product)=>
     Delete(product);
     public async Task<IEnumerable<Product>> GetAllProductsAsync(bool trackChanges)=>
-      await  FindAll(trackChanges).ToListAsync(); 
+      await  FindAll(trackChanges).
+      Include(p=>p.Category).
+      ToListAsync(); 
 
     public async Task<Product> GetProductByIdAsync(Guid Id, bool trackChanges)=>
      await FindByCondition(x=>x.Id.Equals(Id),trackChanges)

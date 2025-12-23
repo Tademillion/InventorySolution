@@ -26,7 +26,9 @@ public class MappingProfile : Profile
                     //     products
         CreateMap<CreateProductDto, Product>();
         CreateMap<UpdateProductDto, Product>();
-        CreateMap<Product, ProductResponseDto>();
+        CreateMap<Product, ProductResponseDto>()
+        .ForMember(dest=>dest.CategoryName,
+        opt=>opt.MapFrom(src=>src.Category.Name));
                     //    Supplier
         CreateMap<SupplierUpdateDto, Supplier>();
         CreateMap<Supplier, SupplierDto>();
