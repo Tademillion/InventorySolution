@@ -1,11 +1,11 @@
 "use client";
 
-import { Category } from "@/lib/types";
-import { CategoryService } from "@/Services/category.services";
+ import { CategoryService } from "@/Services/category.services";
+import { categoryDto } from "@/Types/category";
 import { useEffect, useState } from "react";
 
 export function useCategory() {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<categoryDto[]>([]);
   const [loading, setLoading] = useState(true);
 // Fetch categories on mount
 useEffect(() => {
@@ -23,7 +23,7 @@ useEffect(() => {
             console.error("Failed to fetch categories", err);
         })};
 //    add the categories to the state and update state optimistically
-  const addCategory =  async (category: Category) => { 
+  const addCategory =  async (category: categoryDto) => { 
     //  add the category and update the state optimistically
     const res= await CategoryService.create(category);
     setCategories((prevCategories) => [...prevCategories, category]);

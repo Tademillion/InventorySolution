@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { useCategory } from "@/hooks/Category/UseCategory"
 import type { Category } from "@/lib/types"
+import { categoryDto } from "@/Types/category"
 import { MoreHorizontal, Pencil, Plus } from "lucide-react"
 import { useState } from "react"
 
 export default function CategoriesPage() {
   const { categories ,addCategory } = useCategory()
 
-  // const [categories, setCategories] = useState(categ)
-  const [dialogOpen, setDialogOpen] = useState(false)
+   const [dialogOpen, setDialogOpen] = useState(false)
   const [editingCategory, setEditingCategory] = useState<Category | undefined>()
    const handleSave = (categoryData: Partial<Category>) => {
     if (editingCategory) {
@@ -39,6 +39,7 @@ export default function CategoriesPage() {
   }
 
   const columns = [
+    
     {
       header: "Category Name",
       accessor: "name" as const,
@@ -48,10 +49,6 @@ export default function CategoriesPage() {
       header: "Description",
       accessor: "description" as const,
     }
-    // {
-    //   header: "Created",
-    //   accessor: (row: Category) => row.createdAt.toLocaleDateString(),
-    // },
   ]
 
   return (
@@ -70,8 +67,7 @@ export default function CategoriesPage() {
       <DataTable
         data={categories}
         columns={columns}
-        searchKey="name"
-        searchPlaceholder="Search categories..."
+         searchPlaceholder="Search categories..."
         actions={(row) => (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

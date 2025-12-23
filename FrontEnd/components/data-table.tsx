@@ -19,7 +19,7 @@ interface DataTableProps<T> {
   actions?: (row: T) => React.ReactNode
 }
 
-export function DataTable<T extends { id: string }>({
+export function DataTable<T extends {  }>({
   data,
   columns,
   searchKey,
@@ -75,8 +75,8 @@ export function DataTable<T extends { id: string }>({
                   </td>
                 </tr>
               ) : (
-                filteredData.map((row) => (
-                  <tr key={row.id} className="border-b last:border-0 hover:bg-muted/50">
+                filteredData.map((row,index) => (
+                  <tr key={index} className="border-b last:border-0 hover:bg-muted/50">
                     {columns.map((column, colIndex) => (
                       <td key={colIndex} className={`px-4 py-3 text-sm ${column.className || ""}`}>
                         {typeof column.accessor === "function"
