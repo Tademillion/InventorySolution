@@ -39,6 +39,5 @@ public class Warehouse
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
     // 🔗 Navigation Properties
-    public ICollection<Product> Products { get; set; } = new List<Product>();
-    public ICollection<StockMovement> StockMovements { get; set; } = new List<StockMovement>();
+     public ICollection<StockMovement> StockMovements { get; set; } = new List<StockMovement>();
 }

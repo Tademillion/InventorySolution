@@ -13,5 +13,4 @@ public class Supplier
     [MaxLength(250)]
     public string? Address { get; set; } 
     // Relationships
-    public ICollection<Product> Products { get; set; } = new List<Product>();
-}
+ }

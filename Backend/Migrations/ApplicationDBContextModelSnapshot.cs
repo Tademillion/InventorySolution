@@ -156,19 +156,19 @@ namespace InventorySystemSolution.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6a05ba2e-3e39-42d9-8c20-f2dc81753a47",
+                            Id = "f5673164-98b9-4532-876c-6cb0d19029c3",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b6b55d09-6dce-47d3-9b26-fa3bf03abd02",
+                            Id = "dd609349-0fea-42ae-9c56-2ca936971352",
                             Name = "Auditor",
                             NormalizedName = "AUDITOR"
                         },
                         new
                         {
-                            Id = "dbf2c25f-d1ae-4f3f-9baf-0bd494423248",
+                            Id = "4b1eaee6-5346-4516-a3b3-f698a5e82fb6",
                             Name = "Cashier",
                             NormalizedName = "CASHIER"
                         });
@@ -304,19 +304,9 @@ namespace InventorySystemSolution.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("SupplierId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("WarehouseId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("SupplierId");
-
-                    b.HasIndex("WarehouseId");
 
                     b.ToTable("Products");
                 });
@@ -716,14 +706,6 @@ namespace InventorySystemSolution.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Supplier", null)
-                        .WithMany("Products")
-                        .HasForeignKey("SupplierId");
-
-                    b.HasOne("Warehouse", null)
-                        .WithMany("Products")
-                        .HasForeignKey("WarehouseId");
-
                     b.Navigation("Category");
                 });
 
@@ -793,15 +775,8 @@ namespace InventorySystemSolution.Migrations
                     b.Navigation("StockMovements");
                 });
 
-            modelBuilder.Entity("Supplier", b =>
-                {
-                    b.Navigation("Products");
-                });
-
             modelBuilder.Entity("Warehouse", b =>
                 {
-                    b.Navigation("Products");
-
                     b.Navigation("StockMovements");
                 });
 #pragma warning restore 612, 618

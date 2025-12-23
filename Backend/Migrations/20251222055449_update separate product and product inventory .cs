@@ -95,21 +95,7 @@ namespace InventorySystemSolution.Migrations
                 type: "uniqueidentifier",
                 nullable: true);
 
-            migrationBuilder.AlterColumn<Guid>(
-                name: "WarehouseId",
-                table: "Products",
-                type: "uniqueidentifier",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier");
 
-            migrationBuilder.AlterColumn<Guid>(
-                name: "SupplierId",
-                table: "Products",
-                type: "uniqueidentifier",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Sku",

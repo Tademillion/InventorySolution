@@ -43,9 +43,12 @@ public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto produ
         _repository.Product.CreateProduct(productEntity);
         //  assign the SKu
          var Sku=_generator.Generate(productEntity);
+         _logger.LogInformation("the Sku generated is"+Sku);
          productEntity.AssignSku(Sku);
-    var productToReturn = _mapper.Map<ProductInventoryDto>(productEntity);
-    return CreatedAtRoute("GetProductById", new { id = productToReturn.ProductId }, productToReturn); 
+        //  await _repository.SaveAsync();
+    var productToReturn = _mapper.Map<ProductResponseDto>(productEntity);
+
+    return CreatedAtRoute("GetProductById", new { id = productToReturn.Id }, productToReturn); 
     }
     //  update we can continue
     }

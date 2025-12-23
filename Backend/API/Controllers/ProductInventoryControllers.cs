@@ -41,7 +41,7 @@ public async Task<IActionResult> CreateProductInventory([FromBody] CreateProduct
     var productEntity = _mapper.Map<ProductInventory>(productInventoryDto);
     // assign the SKU
      
-    _repository.ProductInventory.CreateProductInventory(productEntity);
+       _repository.ProductInventory.CreateProductInventory(productEntity);
     await _repository.SaveAsync();
     var productToReturn = _mapper.Map<ProductInventoryDto>(productEntity);
     return CreatedAtRoute("GetProductInventoryById", new { id = productToReturn.ProductId }, productToReturn); 

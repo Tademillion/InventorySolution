@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventorySystemSolution.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20251217063607_update warehouse entity")]
-    partial class updatewarehouseentity
+    [Migration("20251222134521_update product ")]
+    partial class updateproduct
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -159,19 +159,19 @@ namespace InventorySystemSolution.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f26f9769-3e4c-4546-81cb-0187aed35ec5",
+                            Id = "c9790a62-1acd-41dd-8003-6bf0c740ca02",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b36c0e2c-18ce-4f80-bbc8-5dc42a0e0986",
+                            Id = "dcf49818-b304-4233-8cb0-146cc7d93b5b",
                             Name = "Auditor",
                             NormalizedName = "AUDITOR"
                         },
                         new
                         {
-                            Id = "dc49febc-692c-4fc9-a686-d398b85a1f29",
+                            Id = "15d75174-abd0-45f7-9fc3-6f932f3a0792",
                             Name = "Cashier",
                             NormalizedName = "CASHIER"
                         });
@@ -285,6 +285,47 @@ namespace InventorySystemSolution.Migrations
 
             modelBuilder.Entity("Product", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sku")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("SupplierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("WarehouseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("ProductInventory", b =>
+                {
                     b.Property<Guid>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
@@ -338,18 +379,29 @@ namespace InventorySystemSolution.Migrations
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
- 
+
+                    b.Property<Guid>("SupplierId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Unit")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
- 
+
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("ProductId");
 
-                    b.HasIndex("CategoryId"); 
-                    b.ToTable("Products");
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("ProductInventory");
                 });
 
             modelBuilder.Entity("SkuRule", b =>
@@ -399,6 +451,9 @@ namespace InventorySystemSolution.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ProductInventoryProductId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -408,6 +463,8 @@ namespace InventorySystemSolution.Migrations
                     b.HasKey("StockMovementId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("ProductInventoryProductId");
 
                     b.HasIndex("WarehouseId");
 
@@ -662,14 +719,33 @@ namespace InventorySystemSolution.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Supplier", "Supplier")
+                    b.HasOne("Supplier", null)
                         .WithMany("Products")
+                        .HasForeignKey("SupplierId");
+
+                    b.HasOne("Warehouse", null)
+                        .WithMany("Products")
+                        .HasForeignKey("WarehouseId");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ProductInventory", b =>
+                {
+                    b.HasOne("Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Supplier", "Supplier")
+                        .WithMany()
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Warehouse", "Warehouse")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -684,10 +760,14 @@ namespace InventorySystemSolution.Migrations
             modelBuilder.Entity("StockMovement", b =>
                 {
                     b.HasOne("Product", "Product")
-                        .WithMany("StockMovements")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ProductInventory", null)
+                        .WithMany("StockMovements")
+                        .HasForeignKey("ProductInventoryProductId");
 
                     b.HasOne("Warehouse", null)
                         .WithMany("StockMovements")
@@ -711,7 +791,7 @@ namespace InventorySystemSolution.Migrations
                     b.Navigation("InvoiceItems");
                 });
 
-            modelBuilder.Entity("Product", b =>
+            modelBuilder.Entity("ProductInventory", b =>
                 {
                     b.Navigation("StockMovements");
                 });
