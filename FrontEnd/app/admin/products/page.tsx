@@ -11,11 +11,12 @@ import { Plus, Pencil, AlertTriangle } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
 import { useProducts } from "@/hooks/Products/UseProducts"
+import { ProductDto } from "@/Types/product"
 
 export default function ProductsPage() {
   // const [products, setProducts] = useState(MOCK_PRODUCTS)
   const [dialogOpen, setDialogOpen] = useState(false)
-  const [editingProduct, setEditingProduct] = useState<Product | undefined>()
+  const [editingProduct, setEditingProduct] = useState<ProductDto | undefined>()
 
       const {products}= useProducts();
    const handleSave = (productData: Partial<Product>) => {
@@ -24,7 +25,7 @@ export default function ProductsPage() {
     setEditingProduct(undefined)
   }
 
-  const handleEdit = (product: Product) => {
+  const handleEdit = (product: ProductDto) => {
     setEditingProduct(product)
     setDialogOpen(true)
   }
@@ -47,52 +48,14 @@ export default function ProductsPage() {
     },
     {
       header: "Category",
-      accessor: "categoryName" as const,
+      accessor: "category" as const,
     },
+    
     {
-      header: "Stock",
-      accessor: (row: Product) => {
-        const isLowStock = row.stock <= row.reorderLevel
-        const isOutOfStock = row.stock === 0
-
-        return (
-          <div className="flex items-center gap-2">
-            <span className={isOutOfStock ? "text-destructive font-medium" : isLowStock ? "text-warning" : ""}>
-              {row.stock} units
-            </span>
-            {isLowStock && <AlertTriangle className="h-4 w-4 text-warning" />}
-          </div>
-        )
-      },
+      header: "Description",
+      accessor: (row: ProductDto) => `$${row.description}`,
     },
-    {
-      header: "Price",
-      accessor: (row: Product) => `$${row.price.toFixed(2)}`,
-    },
-    {
-      header: "Status",
-      accessor: (row: Product) => {
-        if (row.stock === 0) {
-          return (
-            <Badge variant="destructive" className="bg-destructive text-destructive-foreground">
-              Out of Stock
-            </Badge>
-          )
-        }
-        if (row.stock <= row.reorderLevel) {
-          return (
-            <Badge variant="outline" className="border-warning text-warning">
-              Low Stock
-            </Badge>
-          )
-        }
-        return (
-          <Badge variant="outline" className="border-success text-success">
-            In Stock
-          </Badge>
-        )
-      },
-    },
+    
   ]
 
   return (
@@ -109,9 +72,9 @@ export default function ProductsPage() {
       </div>
 
       <DataTable
-        data={MOCK_PRODUCTS}
+        data={products}
         columns={columns}
-        searchKey="name"
+        // searchKey="id"
         searchPlaceholder="Search products..."
         actions={(row) => (
           <DropdownMenu>

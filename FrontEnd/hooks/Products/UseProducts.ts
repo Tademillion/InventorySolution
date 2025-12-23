@@ -2,11 +2,11 @@
 
 import { Product } from "@/lib/types";
 import { ProductService } from "@/Services/Products/product.services";
-import { ProductDto } from "@/Types/product";
+import { CreateProductDto, ProductDto } from "@/Types/product";
 import { useEffect, useState } from "react"; 
 
 export function useProducts() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductDto[]>([]);
   const [loading, setLoading] = useState(true);
 // Fetch products on mount
   useEffect(() => {
@@ -17,7 +17,14 @@ export function useProducts() {
       .finally(() => setLoading(false)).catch(err => {
         console.error("Failed to fetch products", err);
       });
-  }, []);
-
-  return { products, loading };
+      
+  },[])
+  const addProducts =  async (product: CreateProductDto) => { 
+           const res= await ProductService.create(product);  
+          setProducts((prevProducts) => [...prevProducts, res.data]);
+          return res.data;
+        }
+  
+  
+  return { products, loading ,addProducts};
 }

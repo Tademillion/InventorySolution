@@ -3,7 +3,10 @@ import { http } from "../http";
 import { Product } from "@/lib/types";
 
 export const ProductService = {
-  getAll: () => http.get<Product[]>("/products"),
+  getAll: () => http.get<ProductDto[]>("/products").then(response=>
+    {console.log("teh response is  here"+response)
+    return response}
+  ),
 
   getById: (id: number) =>
     http.get<ProductDto>(`/products/${id}`),

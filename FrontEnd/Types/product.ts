@@ -1,10 +1,9 @@
 export interface ProductDto {
-  id: number;
+  id: string;
   name: string;
   description: string;
-  price: number;
-  createdAt: string;
-  updatedAt: string;
+  category:string;
+  sku:string
 }
 export interface CreateProductDto {
   name: string;
