@@ -38,12 +38,17 @@ public async Task<IActionResult> GetProductInventoryById(Guid id)
 [HttpPost]
 public async Task<IActionResult> CreateProductInventory([FromBody] CreateProductInventoryDto productInventoryDto)
 {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
     var productEntity = _mapper.Map<ProductInventory>(productInventoryDto);
     // assign the SKU
-     
+
+          _logger.LogInformation("the product to create is"+productEntity);
        _repository.ProductInventory.CreateProductInventory(productEntity);
     await _repository.SaveAsync();
-    var productToReturn = _mapper.Map<ProductInventoryDto>(productEntity);
-    return CreatedAtRoute("GetProductInventoryById", new { id = productToReturn.ProductId }, productToReturn); 
+    // var productToReturn = _mapper.Map<ProductInventoryDto>(productEntity);
+    return CreatedAtRoute("GetProductInventoryById", new { id = productEntity.ProductId }, productEntity); 
 }
 }

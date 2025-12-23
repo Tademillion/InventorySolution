@@ -12,18 +12,17 @@ public class ProductInventoryDto
 
     public int StockQuantity { get; set; }
 
-    public int CategoryId { get; set; }
+    public Guid CategoryId { get; set; }
     public string CategoryName { get; set; }
 
-    public int SupplierId { get; set; }
+    public Guid SupplierId { get; set; }
     public string SupplierName { get; set; }
 }
 
 
 public class CreateProductInventoryDto
 {
-    [Required, MaxLength(150)]
-    public Guid ProductId { get; set; } 
+     public Guid ProductId { get; set; } 
 
     [Required]
     [Range(0, 999999)]
