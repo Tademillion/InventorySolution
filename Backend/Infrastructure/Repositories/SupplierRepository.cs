@@ -12,7 +12,7 @@ public class SupplierRepository : RepositoryBase<Supplier>, ISupplierRepository
         .OrderBy(s => s.Name)
         .ToListAsync();
 
-    public async Task<Supplier> GetSupplierAsync(int supplierId, bool trackChanges) =>
+    public async Task<Supplier> GetSupplierAsync(Guid supplierId, bool trackChanges) =>
         await FindByCondition(s => s.SupplierId.Equals(supplierId), trackChanges)
         .SingleOrDefaultAsync();
 

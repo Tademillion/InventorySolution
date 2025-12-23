@@ -1,6 +1,6 @@
 public class SupplierDto
 {
-    public int SupplierId { get; set; }
+    public Guid SupplierId { get; set; }
 
     public string Name { get; set; }
 

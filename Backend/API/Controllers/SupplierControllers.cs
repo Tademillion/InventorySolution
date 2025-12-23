@@ -24,7 +24,7 @@ public class SupplierControllers : ControllerBase
     }
 
     [HttpGet("{id}", Name = "GetSupplierById")]
-    public async Task<IActionResult> GetSupplierById(int id)
+    public async Task<IActionResult> GetSupplierById(Guid id)
     {
         var supplier = await _repository.Supplier.GetSupplierAsync(id, trackChanges: false);
         if (supplier == null)
@@ -47,7 +47,7 @@ public class SupplierControllers : ControllerBase
      }
     //   update
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateSupplier(int id, [FromBody] SupplierUpdateDto supplierDto)
+    public async Task<IActionResult> UpdateSupplier(Guid id, [FromBody] SupplierUpdateDto supplierDto)
     {
         var supplierEntity = await _repository.Supplier.GetSupplierAsync(id, trackChanges: true);
         _logger.LogInformation($"Updating supplier with ID: {supplierEntity.Address}");

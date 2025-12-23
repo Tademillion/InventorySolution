@@ -33,7 +33,7 @@ public class MappingProfile : Profile
         CreateMap<SupplierUpdateDto, Supplier>();
         CreateMap<Supplier, SupplierDto>();
         CreateMap<SupplierCreateDto, Supplier>();
-        //  Category
+         //  Category
         CreateMap<CreateCategoryDto, Category>();
         CreateMap<UpdateCategoryDto, Category>();
         CreateMap<Category, CategoryDto>();
