@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 public class ProductInventoryDto
 {
-    public int ProductId { get; set; }
+    public Guid ProductId { get; set; }
 
     public string Name { get; set; }
 
@@ -23,24 +23,21 @@ public class ProductInventoryDto
 public class CreateProductInventoryDto
 {
     [Required, MaxLength(150)]
-    public string Name { get; set; }
-
-    [MaxLength(250)]
-    public string? Description { get; set; }
+    public Guid ProductId { get; set; } 
 
     [Required]
     [Range(0, 999999)]
     public decimal Price { get; set; }
+    public decimal Cost {get;set;}
 
     [Required]
     [Range(0, int.MaxValue)]
-    public int StockQuantity { get; set; }
-
-    [Required]
-    public Guid CategoryId { get; set; }
-
+    public int StockQuantity { get; set; } 
+ 
     [Required]
     public Guid SupplierId { get; set; }
+    [Required]
+    public Guid WarehouseId {get;set;}
 }
 
 public class UpdateProductInventoryDto

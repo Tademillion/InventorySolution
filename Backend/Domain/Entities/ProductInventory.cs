@@ -5,15 +5,8 @@ public class ProductInventory
 {
     [Key]
     public Guid ProductId { get; set; }
-
-    [Required, MaxLength(50)]
-    public string Sku { get; set; } = default!; 
-
-    [Required, MaxLength(150)]
-    public string Name { get; set; } = default!;
-
-    [MaxLength(500)]
-    public string? Description { get; set; }
+    public Product Product {get;set;}=default!;
+   
 
     [Required]
     public decimal Price { get; set; }
@@ -39,9 +32,7 @@ public class ProductInventory
     public bool IsActive { get; set; } = true;
 
     // 🔗 Relationships
-    public Guid CategoryId { get; set; }
-    public Category Category { get; set; } = default!;
-
+  
     public Guid SupplierId { get; set; }
     public Supplier Supplier { get; set; } = default!;
 
