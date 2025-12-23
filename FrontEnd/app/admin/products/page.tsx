@@ -48,7 +48,7 @@ export default function ProductsPage() {
     },
     {
       header: "Category",
-      accessor: "category" as const,
+      accessor: "categoryName" as const,
     },
     
     {

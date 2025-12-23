@@ -2,7 +2,7 @@ export interface ProductDto {
   id: string;
   name: string;
   description: string;
-  category:string;
+  categoryName:string;
   sku:string
 }
 export interface CreateProductDto {
