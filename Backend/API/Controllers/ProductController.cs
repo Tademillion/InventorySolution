@@ -32,7 +32,7 @@ public class ProductController:ControllerBase
 public async Task<IActionResult> GetproductById(Guid id)
     {
         var product= await _repository.Product.GetProductByIdAsync(id,false);
-        var mappedDto= _mapper.Map<ProductResponseDto>(product);
+         var mappedDto= _mapper.Map<ProductResponseDto>(product);
         return Ok(mappedDto);
     }
 
@@ -40,11 +40,11 @@ public async Task<IActionResult> GetproductById(Guid id)
 public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto product)
     {
         var productEntity= _mapper.Map<Product>(product);
+         var Sku=_generator.Generate(productEntity); 
+         productEntity.AssignSku(Sku); 
         _repository.Product.CreateProduct(productEntity);
         //  assign the SKu
-         var Sku=_generator.Generate(productEntity);
-         _logger.LogInformation("the Sku generated is"+Sku);
-         productEntity.AssignSku(Sku);
+          _logger.LogInformation("the Assigned product is"+productEntity);
         //  await _repository.SaveAsync();
     var productToReturn = _mapper.Map<ProductResponseDto>(productEntity);
 
