@@ -8,7 +8,7 @@ export interface ProductDto {
 export interface CreateProductDto {
   name: string;
   description: string;
-  price: number;
+  CategoryId: string;
 }
 
 export interface UpdateProductDto {

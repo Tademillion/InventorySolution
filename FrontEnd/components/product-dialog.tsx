@@ -17,28 +17,22 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { Product, Category, Supplier } from "@/lib/types"
-import { ProductDto } from "@/Types/product"
+import { CreateProductDto, ProductDto } from "@/Types/product"
 
 interface ProductDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  product?: ProductDto
-  categories: Category[]
-  suppliers: Supplier[]
-  onSave: (product: Partial<Product>) => void
+  product?: CreateProductDto
+  categories: Category[] 
+  onSave: (product: CreateProductDto) => void
 }
 
-export function ProductDialog({ open, onOpenChange, product, categories, suppliers, onSave }: ProductDialogProps) {
-  const [formData, setFormData] = useState<Partial<Product>>(
-    product || {
-      sku: "",
+export function ProductDialog({ open, onOpenChange, product, categories, onSave }: ProductDialogProps) {
+  const [formData, setFormData] = useState<CreateProductDto>(
+    product || { 
       name: "",
       description: "",
-      categoryId: "",
-      price: 0,
-      cost: 0,
-      reorderLevel: 0,
-      supplierId: "",
+      CategoryId: "", 
     },
   )
 
@@ -74,15 +68,15 @@ export function ProductDialog({ open, onOpenChange, product, categories, supplie
               <div className="space-y-2">
                <Label htmlFor="category">Category *</Label>
                 <Select
-                  value={formData.categoryId}
-                  onValueChange={(value) => setFormData({ ...formData, categoryId: value })}
+                  value={formData.CategoryId}
+                  onValueChange={(value) => setFormData({ ...formData, CategoryId: value })}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
                     {categories.map((cat) => (
-                      <SelectItem key={cat.id} value={cat.id}>
+                      <SelectItem key={cat.categoryId} value={cat.categoryId}>
                         {cat.name}
                       </SelectItem>
                     ))}

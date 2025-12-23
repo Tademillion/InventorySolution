@@ -35,13 +35,10 @@ export interface Product {
 }
 
 export interface Category {
-  id: string
+  categoryId: string
   name: string
-  description: string
-  parentId?: string
-  parentName?: string
-  isActive: boolean
-  createdAt: Date
+  description: string 
+  isActive: boolean 
 }
 
 export interface Supplier {

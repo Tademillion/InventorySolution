@@ -11,21 +11,24 @@ import { Plus, Pencil, AlertTriangle } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
 import { useProducts } from "@/hooks/Products/UseProducts"
-import { ProductDto } from "@/Types/product"
+import { CreateProductDto, ProductDto } from "@/Types/product"
+import { useCategory } from "@/hooks/Category/UseCategory"
 
 export default function ProductsPage() {
   // const [products, setProducts] = useState(MOCK_PRODUCTS)
   const [dialogOpen, setDialogOpen] = useState(false)
-  const [editingProduct, setEditingProduct] = useState<ProductDto | undefined>()
+  const [editingProduct, setEditingProduct] = useState<CreateProductDto | undefined>()
 
-      const {products}= useProducts();
-   const handleSave = (productData: Partial<Product>) => {
+      const {products,addProducts}= useProducts();
+      const {categories}= useCategory();
+   const handleSave = (productData: CreateProductDto) => {
     if (editingProduct) {
     }
+    addProducts(productData);
     setEditingProduct(undefined)
   }
 
-  const handleEdit = (product: ProductDto) => {
+  const handleEdit = (product: CreateProductDto) => {
     setEditingProduct(product)
     setDialogOpen(true)
   }
@@ -74,7 +77,7 @@ export default function ProductsPage() {
       <DataTable
         data={products}
         columns={columns}
-        // searchKey="id"
+        searchKey="name"
         searchPlaceholder="Search products..."
         actions={(row) => (
           <DropdownMenu>
@@ -84,7 +87,7 @@ export default function ProductsPage() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => handleEdit(row)}>
+              <DropdownMenuItem onClick={() => {}}>
                 <Pencil className="h-4 w-4 mr-2" />
                 Edit
               </DropdownMenuItem>
@@ -97,8 +100,8 @@ export default function ProductsPage() {
         open={dialogOpen}
         onOpenChange={setDialogOpen}
         product={editingProduct}
-        categories={MOCK_CATEGORIES}
-        suppliers={MOCK_SUPPLIERS}
+        categories={categories}
+        
         onSave={handleSave}
       />
     </div>

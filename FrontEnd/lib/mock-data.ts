@@ -63,40 +63,35 @@ export const MOCK_WAREHOUSES: WarehouseProp[] = [
 
 export const MOCK_CATEGORIES: Category[] = [
   {
-    id: "1",
+    categoryId: "1",
     name: "Electronics",
     description: "Electronic devices and accessories",
     isActive: true,
-    createdAt: new Date("2024-01-01"),
-  },
+   },
   {
-    id: "2",
+    categoryId: "2",
     name: "Clothing",
     description: "Apparel and fashion items",
     isActive: true,
-    createdAt: new Date("2024-01-01"),
-  },
+   },
   {
-    id: "3",
+    categoryId: "3",
     name: "Food & Beverage",
     description: "Food and drink products",
     isActive: true,
-    createdAt: new Date("2024-01-01"),
-  },
+   },
   {
-    id: "4",
+    categoryId: "4",
     name: "Pharmaceuticals",
     description: "Medical and pharmaceutical products",
     isActive: true,
-    createdAt: new Date("2024-01-01"),
-  },
+   },
   {
-    id: "5",
+    categoryId: "5",
     name: "Home & Garden",
     description: "Home improvement and garden supplies",
     isActive: true,
-    createdAt: new Date("2024-01-01"),
-  },
+   },
 ]
 
 export const MOCK_SUPPLIERS: Supplier[] = [
