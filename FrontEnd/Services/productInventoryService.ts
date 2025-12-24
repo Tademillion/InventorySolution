@@ -2,7 +2,7 @@
 import { http } from "./http";
 import { CreateProductInventory, ProductInventory, UpdateProductInventory } from "@/Types/productinventory";
  
-export const SupplierServices = {
+export const productInventoryService = {
   getAll: () => http.get<ProductInventory[]>("/productinventory"),
 
   getById: (id: number) =>
