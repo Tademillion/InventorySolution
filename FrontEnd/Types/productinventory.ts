@@ -7,7 +7,7 @@ export interface ProductInventory {
   description: string;
   price: number;
   cost: number;
-  stockQuantity: number;
+  stock: number;
   supplierId: string;     
   supplierName: string;
   wareHouseId: string;    

@@ -3,8 +3,8 @@ import { CreateProductInventory, ProductInventory } from "@/Types/productinvento
 import { useEffect, useState } from "react";
 
  
-export function useSupplier() {
-  const [suppliers, setSuppliers] = useState<ProductInventory[]>([]);
+export function useProductInventory() {
+  const [items, setItems] = useState<ProductInventory[]>([]);
   const [loading, setLoading] = useState(true);
 // Fetch suppliers on mount
 useEffect(() => {
@@ -15,17 +15,17 @@ useEffect(() => {
         await productInventoryService.getAll()
         .then((res) => {
             console.log("Fetched suppliers:", res.data);
-            setSuppliers(res.data);
+            setItems(res.data);
         })
         .finally(() => setLoading(false))
         .catch((err) => {
             console.error("Failed to fetch suppliers", err);
         })};
         //  add the supplier to the state and update state optimistically
-    const addSupplier =  async (item: CreateProductInventory) => {
+    const addItems =  async (item: CreateProductInventory) => {
      const res= await productInventoryService.create(item); 
      await productInventoryService.getAll();
     return res.data;
   }
-  return { suppliers, loading ,addSupplier};
+  return { items, loading ,addItems};
     }

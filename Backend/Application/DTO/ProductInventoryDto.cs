@@ -14,7 +14,7 @@ public class ProductInventoryDto
     public decimal Price { get; set; }
     public decimal Cost {get;set;}
 
-    public int StockQuantity { get; set; }
+    public int stock { get; set; }
  
 
     public Guid SupplierId { get; set; }

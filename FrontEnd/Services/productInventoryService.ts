@@ -1,5 +1,4 @@
- import { Supplier } from "@/Types/supplier";
-import { http } from "./http";
+ import { http } from "./http";
 import { CreateProductInventory, ProductInventory, UpdateProductInventory } from "@/Types/productinventory";
  
 export const productInventoryService = {

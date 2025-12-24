@@ -11,11 +11,14 @@ import { Plus, Pencil, AlertTriangle } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
 import { useProducts } from "@/hooks/Products/UseProducts"
+import { ProductInventory } from "@/Types/productinventory"
+import { useProductInventory } from "@/hooks/useProductInventory"
 
 export default function ProductsPage() {
   // const [products, setProducts] = useState(MOCK_PRODUCTS)
+  const {items:ProductItem}= useProductInventory();
   const [dialogOpen, setDialogOpen] = useState(false)
-  const [editingProduct, setEditingProduct] = useState<Product | undefined>()
+  const [editingProduct, setEditingProduct] = useState<ProductInventory | undefined>()
 
       const {products}= useProducts();
    const handleSave = (productData: Partial<Product>) => {
@@ -46,7 +49,7 @@ export default function ProductsPage() {
   }
 
   const handleEdit = (product: Product) => {
-    setEditingProduct(product)
+    // setEditingProduct(product)
     setDialogOpen(true)
   }
 
@@ -54,66 +57,99 @@ export default function ProductsPage() {
     setEditingProduct(undefined)
     setDialogOpen(true)
   }
-
-  const columns = [
-    {
-      header: "SKU",
-      accessor: "sku" as const,
-      className: "font-mono text-xs",
-    },
+ 
+  const newColumns=[
     {
       header: "Product Name",
-      accessor: "name" as const,
+      accessor: "productName" as const,
       className: "font-medium",
     },
     {
       header: "Category",
       accessor: "categoryName" as const,
     },
-    {
-      header: "Stock",
-      accessor: (row: Product) => {
-        const isLowStock = row.stock <= row.reorderLevel
-        const isOutOfStock = row.stock === 0
+  ]
 
-        return (
-          <div className="flex items-center gap-2">
-            <span className={isOutOfStock ? "text-destructive font-medium" : isLowStock ? "text-warning" : ""}>
-              {row.stock} units
-            </span>
-            {isLowStock && <AlertTriangle className="h-4 w-4 text-warning" />}
-          </div>
-        )
-      },
+  const columns = [
+    // {
+    //   header: "SKU",
+    //   accessor: "sku" as const,
+    //   className: "font-mono text-xs",
+    // },
+    {
+      header: "Product Name",
+      accessor: "productName" as const,
+      className: "font-medium",
     },
     {
-      header: "Price",
-      accessor: (row: Product) => `$${row.price.toFixed(2)}`,
+      header: "Category",
+      accessor: "categoryName" as const,
     },
+    // {
+    //   header: "Stock",
+    //   accessor: (row: Product) => {
+    //     const isLowStock = row.stock <= row.reorderLevel
+    //     const isOutOfStock = row.stock === 0
+
+    //     return (
+    //       <div className="flex items-center gap-2">
+    //         <span className={isOutOfStock ? "text-destructive font-medium" : isLowStock ? "text-warning" : ""}>
+    //           {row.stock} units
+    //         </span>
+    //         {isLowStock && <AlertTriangle className="h-4 w-4 text-warning" />}
+    //       </div>
+    //     )
+    //   },
+    // },
     {
-      header: "Status",
-      accessor: (row: Product) => {
-        if (row.stock === 0) {
-          return (
-            <Badge variant="destructive" className="bg-destructive text-destructive-foreground">
-              Out of Stock
-            </Badge>
-          )
-        }
-        if (row.stock <= row.reorderLevel) {
-          return (
-            <Badge variant="outline" className="border-warning text-warning">
-              Low Stock
-            </Badge>
-          )
-        }
-        return (
-          <Badge variant="outline" className="border-success text-success">
-            In Stock
-          </Badge>
-        )
-      },
-    },
+  // header: "Stock",
+  // // Treating 'stock' as the direct value (string or number)
+  // render: (stock: string | number) => {
+  //   // Convert to number just in case it's a string "50"
+  //   const stockValue = Number(stock);
+    
+  //   const isOutOfStock = stockValue === 0;
+  //   const isLowStock = stockValue <= 10; // Your threshold
+
+  //   return (
+  //     <div className={`flex items-center gap-2 ${
+  //       isOutOfStock ? "text-destructive font-medium" : 
+  //       isLowStock ? "text-warning" : ""
+  //     }`}>
+  //       {stockValue} units
+  //       {isLowStock && <AlertTriangle className="h-4 w-4" />}
+  //     </div>
+  //   );
+  // }
+},
+    // {
+    //   header: "Price",
+    //   accessor: (row: Product) => `$${row.price.toFixed(2)}`,
+    // },
+    // {
+    //   header: "Status",
+    //   accessor: (row: Product) => {
+    //     if (row.stock === 0) {
+    //       return (
+    //         <Badge variant="destructive" className="bg-destructive text-destructive-foreground">
+    //           Out of Stock
+    //         </Badge>
+    //       )
+    //     }
+    //     if (row.stock <= row.reorderLevel) {
+    //       return (
+    //         <Badge variant="outline" className="border-warning text-warning">
+    //           Low Stock
+    //         </Badge>
+    //       )
+    //     }
+    //     return (
+    //       <Badge variant="outline" className="border-success text-success">
+    //         In Stock
+    //       </Badge>
+    //     )
+    //   },
+    // },
   ]
 
   return (
@@ -130,9 +166,9 @@ export default function ProductsPage() {
       </div>
 
       <DataTable
-        data={MOCK_PRODUCTS}
-        columns={columns}
-        searchKey="name"
+        data={ProductItem}
+        columns={newColumns}
+        // searchKey="name"
         searchPlaceholder="Search products..."
         actions={(row) => (
           <DropdownMenu>
@@ -142,7 +178,7 @@ export default function ProductsPage() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => handleEdit(row)}>
+              <DropdownMenuItem onClick={() => {}}>
                 <Pencil className="h-4 w-4 mr-2" />
                 Edit
               </DropdownMenuItem>
@@ -154,9 +190,9 @@ export default function ProductsPage() {
       <ProductDialog
         open={dialogOpen}
         onOpenChange={setDialogOpen}
-        product={editingProduct}
+        // product={editingProduct}
         categories={MOCK_CATEGORIES}
-        suppliers={MOCK_SUPPLIERS}
+        // suppliers={MOCK_SUPPLIERS}
         onSave={handleSave}
       />
     </div>
