@@ -1,4 +1,4 @@
-  import { Supplier } from "@/lib/types";
+ import { Supplier } from "@/Types/supplier";
 import { http } from "./http";
  
 export const SupplierServices = {

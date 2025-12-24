@@ -13,8 +13,9 @@ public class MappingProfile : Profile
          opt=>opt.MapFrom(src=>src.Product.Description))
          .ForMember(dest=>dest.CategoryName,
          opt=>opt.MapFrom(src=>src.Product.Category.Name));
-                    //     create Product
-        CreateMap<ProductInventory, CreateProductInventoryDto>();
+
+    CreateMap<ProductInventoryDto,ProductInventory>();
+        CreateMap<CreateProductInventoryDto,ProductInventory>();
         //     update Product
            CreateMap<UpdateProductInventoryDto, ProductInventory>()
             .ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));        //   list Product

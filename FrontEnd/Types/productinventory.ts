@@ -1,39 +1,17 @@
 export interface ProductInventory {
-  productId: string
-
-  sku: string
-  name: string
-  description?: string
-
-  price: number
-  cost: number
-
-  stock: number
-
-  reorderLevel: number
-  reorderQuantity: number
-
-  unit: string
-
-  hasBatchTracking: boolean
-  hasExpiryTracking: boolean
-
-  barcode?: string
-  imageUrl?: string
-
-  isActive: boolean
-
-  categoryId: string
-  categoryName: string
-
-  supplierId: string
-  supplierName: string
-
-  warehouseId: string
-  warehouseName: string
-
-  createdAt: string
-  updatedAt: string
+ 
+  id: number;
+  productId: string;       
+  productName: string;
+  categoryName: string;
+  description: string;
+  price: number;
+  cost: number;
+  stockQuantity: number;
+  supplierId: string;     
+  supplierName: string;
+  wareHouseId: string;    
+  warehouseName: string; 
 }
 
 export interface ProductInventoryListItem {
@@ -53,19 +31,14 @@ export interface ProductInventoryListItem {
 }
 
 export interface CreateProductInventory {
-  productId: string
-  warehouseId: string
+  
+  ProductId: string;      
+  Price: string;          
+  StockQuantity: number;
+  SupplierId: string;      
+  Cost: string;            
+  WarehouseId: string;    
 
-  price: number
-  cost: number
-
-  reorderLevel: number
-  reorderQuantity: number
-
-  unit: string
-
-  hasBatchTracking: boolean
-  hasExpiryTracking: boolean
 }
 
 export interface UpdateProductInventory {

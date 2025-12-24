@@ -2,6 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 public class ProductInventoryDto
 {
+
+     public int Id {get;set;}
     public Guid ProductId { get; set; }
 
     public string ProductName { get; set; }

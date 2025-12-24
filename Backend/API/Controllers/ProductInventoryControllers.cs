@@ -26,14 +26,17 @@ public async Task<IActionResult> GetAllProductInventories()
 
 } 
 [HttpGet("{id}", Name = "GetProductInventoryById")]
-public async Task<IActionResult> GetProductInventoryById(Guid id)
+public async Task<IActionResult> GetProductInventoryById(int id)
 {
-    var product = await _repository.ProductInventory.GetByIdsAsync(id, trackChanges: false);
+     var product = await _repository.ProductInventory.GetByIdsAsync(id, trackChanges: false);
+      _logger.LogInformation("the productis"+product);  
     if (product == null)
     {
         return NotFound();
     }
-    return Ok(product);
+    //  mapp the response 
+     var productEntity= _mapper.Map<ProductInventoryDto>(product);
+    return Ok(productEntity);
 }
 //  post
 [HttpPost]
@@ -45,11 +48,12 @@ public async Task<IActionResult> CreateProductInventory([FromBody] CreateProduct
         }
     var productEntity = _mapper.Map<ProductInventory>(productInventoryDto);
     // assign the SKU
-
+_logger.LogInformation(productEntity+"");
           _logger.LogInformation("the product to create is"+productEntity);
        _repository.ProductInventory.CreateProductInventory(productEntity);
     await _repository.SaveAsync();
-    // var productToReturn = _mapper.Map<ProductInventoryDto>(productEntity);
-    return CreatedAtRoute("GetProductInventoryById", new { id = productEntity.ProductId }, productEntity); 
+    var productToReturn = _mapper.Map<ProductInventoryDto>(productEntity);
+    return Ok(productToReturn);
+    // return CreatedAtRoute("GetProductInventoryById", new { id = productToReturn.Id }, productToReturn); 
 }
 }
