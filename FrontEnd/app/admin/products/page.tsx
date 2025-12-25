@@ -2,8 +2,7 @@
 
 import { useState } from "react"
 import { DataTable } from "@/components/data-table"
-import { ProductDialog } from "@/components/product-dialog"
-import { Button } from "@/components/ui/button"
+ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MOCK_PRODUCTS, MOCK_CATEGORIES, MOCK_SUPPLIERS } from "@/lib/mock-data"
 import type { Product } from "@/lib/types"
@@ -83,14 +82,14 @@ export default function ProductsPage() {
         
       />
 
-      <ProductDialog
+      {/* <ProductDialog
         open={dialogOpen}
         onOpenChange={setDialogOpen}
         product={editingProduct}
         categories={categories}
         
         onSave={handleSave}
-      />
+      /> */}
     </div>
   )
 }

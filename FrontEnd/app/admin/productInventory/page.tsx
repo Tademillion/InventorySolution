@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react"
- import { ProductDialog } from "@/components/product-dialog"
-import { Button } from "@/components/ui/button"
+ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MOCK_PRODUCTS, MOCK_CATEGORIES, MOCK_SUPPLIERS } from "@/lib/mock-data"
 import type { Product } from "@/lib/types"
@@ -14,6 +13,7 @@ import { ProductInventory } from "@/Types/productinventory"
 import { useProductInventory } from "@/hooks/useProductInventory"
 import { DataTable } from "@/components/data-table"
   import { ColumnDef } from "@tanstack/react-table"
+import { ProductInventoryDialog } from "@/components/product-inventory-dialog"
 export default function ProductsPage() {
   // const [products, setProducts] = useState(MOCK_PRODUCTS)
   const {items:ProductItem}= useProductInventory();
@@ -70,13 +70,9 @@ export default function ProductsPage() {
     },
     {
       header:"Price",
-      // accessorKey:"price"+"ETB",
-      cell:({row}:{row:{original:any}})=>{
-        const price= row.original.price;
-        return(
-          price +" ETB"
-        );
-      }
+      accessorKey:"price",
+      cell: ({ getValue }) => ` ${getValue()} ETB`
+      
     },
      {
   header: "Stock",
@@ -233,14 +229,13 @@ export default function ProductsPage() {
         // )}
       />
 
-      <ProductDialog
+      <ProductInventoryDialog
         open={dialogOpen}
         onOpenChange={setDialogOpen}
         // product={editingProduct}
         categories={MOCK_CATEGORIES}
         // suppliers={MOCK_SUPPLIERS}
-        onSave={handleSave}
-      />
+        onSave={handleSave} suppliers={[]} warehouses={[]}      />
     </div>
   )
 }
