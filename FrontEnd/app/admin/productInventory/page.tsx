@@ -68,31 +68,44 @@ export default function ProductsPage() {
       header: "Category",
       accessorKey: "categoryName" as const ,
     },
-//      {
-//   header: "Stock",
-//    accessor: "stock" as const, 
-//    cell: ({ row }: { row: { original: any } }) => {
-//     const product = row.original;
-//     const isLowStock = product.stock <= product.reorderLevel;
-//     const isOutOfStock = product.stock === 0;
-//     return (
-//       <div className="flex items-center gap-2">
-//         <span className={isOutOfStock ? "text-destructive font-medium" : isLowStock ? "text-warning font-medium" : ""}>
-//           {/* {product.stock} units */}
-//           100
-//         </span>
-//         {isLowStock && !isOutOfStock && (
-//           <AlertTriangle className="h-4 w-4 text-warning" />
-//         )}
-//         {isOutOfStock && (
-//           <span className="text-[10px] bg-destructive/10 text-destructive px-2 py-0.5 rounded-full uppercase">
-//             Empty
-//           </span>
-//         )}
-//       </div>
-//     );
-//   },
-// },
+    {
+      header:"Price",
+      // accessorKey:"price"+"ETB",
+      cell:({row}:{row:{original:any}})=>{
+        const price= row.original.price;
+        return(
+          price +" ETB"
+        );
+      }
+    },
+     {
+  header: "Stock",
+    cell: ({ row }: { row: { original: any } }) => {
+    const product = row.original.stock;
+    // console.log("product is "+product);
+    // const isLowStock = product.stock <= product.reorderLevel;
+    // const isOutOfStock = product.stock === 0;
+     const isOutOfStock=product===0;
+   const isLowStock = product< 10;
+ 
+    return (
+      <div className="flex items-center gap-2">
+        
+        <span className={isOutOfStock ? "text-destructive font-medium" : isLowStock ? "text-warning font-medium" : ""}>
+          {product} units 
+        </span>
+        {isLowStock  && (
+          <AlertTriangle className="h-4 w-4 text-warning" />
+        )}
+        {isOutOfStock && !isOutOfStock && (
+          <span className="text-[10px] bg-destructive/10 text-destructive px-2 py-0.5 rounded-full uppercase">
+            Empty
+          </span>
+        )}
+      </div>
+    );
+  },
+},
     {
       header: "Supplier Name",
       accessorKey: "supplierName" as const ,
