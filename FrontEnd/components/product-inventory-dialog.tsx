@@ -38,15 +38,12 @@ export function ProductInventoryDialog({
   const [formData, setFormData] = useState<CreateProductInventory>({
     ProductId: "",
     Price: "",
-    StockQuantity: 0,
+    stock: 0,
     SupplierId: "",
     Cost: "",
     WarehouseId: "",
   })
-  //  
-  //  const [category,setCategory]= useState();
-  //  const [warehouse,setWareHouse]= useState();
-  //  const [supplier,setSupplier]= useState();
+  //   
    const {warehouses}= useWareHouse();
    const {suppliers}= useSupplier();
    const {products}= useProducts();
@@ -60,7 +57,7 @@ useEffect(()=>{
         ProductId: product.ProductId || "",
         description: product.description || "",
          Price: product.Price?.toString() || "",
-        StockQuantity: product.StockQuantity || 0,
+        stock: product.stock || 0,
         SupplierId: product.SupplierId || "",
         Cost: product.Cost?.toString() || "",
         WarehouseId: product.WarehouseId || "",
@@ -154,7 +151,7 @@ useEffect(()=>{
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="stock" className="text-[11px] uppercase font-bold text-muted-foreground">Quantity</Label>
-                  <Input id="stock" type="number" className="h-10 bg-background font-mono" value={formData.StockQuantity} onChange={(e) => setFormData({ ...formData, StockQuantity: parseInt(e.target.value) || 0 })} required />
+                  <Input id="stock" type="number" className="h-10 bg-background font-mono" value={formData.stock} onChange={(e) => setFormData({ ...formData, stock: parseInt(e.target.value) || 0 })} required />
                 </div>
             </div>
 

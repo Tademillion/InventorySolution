@@ -37,7 +37,7 @@ public class CreateProductInventoryDto
 
     [Required]
     [Range(0, int.MaxValue)]
-    public int StockQuantity { get; set; } 
+    public int stock { get; set; } 
  
     [Required]
     public Guid SupplierId { get; set; }

@@ -34,7 +34,7 @@ export interface CreateProductInventory {
   
   ProductId: string;      
   Price: string;          
-  StockQuantity: number;
+  stock: number;
   SupplierId: string;      
   Cost: string;            
   WarehouseId: string; 

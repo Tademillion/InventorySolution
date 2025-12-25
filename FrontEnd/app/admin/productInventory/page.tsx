@@ -21,7 +21,7 @@ export default function ProductsPage() {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<ProductInventory | undefined>()
 
-      const {products}= useProducts();
+      const {addItems}= useProductInventory();
    const handleSave = (productData: CreateProductInventory) => {
     if (editingProduct) {
     //   // Update existing
@@ -46,7 +46,8 @@ export default function ProductsPage() {
     //   }
     //   setProducts([...products, newProduct])
     }
-    console.log("the submitted inventory is ",productData)
+    // console.log("the submitted inventory is ",productData)
+    addItems(productData);
      setEditingProduct(undefined)
   }
 
@@ -233,10 +234,7 @@ export default function ProductsPage() {
 
       <ProductInventoryDialog
         open={dialogOpen}
-        onOpenChange={setDialogOpen}
-        // product={editingProduct}
-        // categories={MOCK_CATEGORIES}
-        // suppliers={MOCK_SUPPLIERS}
+        onOpenChange={setDialogOpen} 
         onSave={handleSave}      />
     </div>
   )
