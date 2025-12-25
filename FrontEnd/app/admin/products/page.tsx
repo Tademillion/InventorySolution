@@ -13,6 +13,7 @@ import { MoreHorizontal } from "lucide-react"
 import { useProducts } from "@/hooks/Products/UseProducts"
 import { CreateProductDto, ProductDto } from "@/Types/product"
 import { useCategory } from "@/hooks/Category/UseCategory"
+import { ColumnDef } from "@tanstack/react-table"
 
 export default function ProductsPage() {
   // const [products, setProducts] = useState(MOCK_PRODUCTS)
@@ -38,25 +39,25 @@ export default function ProductsPage() {
     setDialogOpen(true)
   }
 
-  const columns = [
+  const columns:ColumnDef<ProductDto>[]= [
     {
       header: "SKU",
-      accessor: "sku" as const,
-      className: "font-mono text-xs",
+      accessorKey: "sku" as const,
+      // className: "font-mono text-xs",
     },
     {
       header: "Product Name",
-      accessor: "name" as const,
-      className: "font-medium",
+      accessorKey: "name" as const,
+      // className: "font-medium",
     },
     {
       header: "Category",
-      accessor: "categoryName" as const,
+      accessorKey: "categoryName" as const,
     },
     
     {
       header: "Description",
-      accessor: (row: ProductDto) => `$${row.description}`,
+      accessorFn: (row: ProductDto) => `$${row.description}`,
     },
     
   ]
@@ -79,21 +80,7 @@ export default function ProductsPage() {
         columns={columns}
         searchKey="name"
         searchPlaceholder="Search products..."
-        actions={(row) => (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm">
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => {}}>
-                <Pencil className="h-4 w-4 mr-2" />
-                Edit
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}
+        
       />
 
       <ProductDialog

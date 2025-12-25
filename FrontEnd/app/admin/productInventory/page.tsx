@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { DataTable } from "@/components/data-table"
-import { ProductDialog } from "@/components/product-dialog"
+ import { ProductDialog } from "@/components/product-dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MOCK_PRODUCTS, MOCK_CATEGORIES, MOCK_SUPPLIERS } from "@/lib/mock-data"
@@ -13,7 +12,8 @@ import { MoreHorizontal } from "lucide-react"
 import { useProducts } from "@/hooks/Products/UseProducts"
 import { ProductInventory } from "@/Types/productinventory"
 import { useProductInventory } from "@/hooks/useProductInventory"
-
+import { DataTable } from "@/components/data-table"
+  import { ColumnDef } from "@tanstack/react-table"
 export default function ProductsPage() {
   // const [products, setProducts] = useState(MOCK_PRODUCTS)
   const {items:ProductItem}= useProductInventory();
@@ -57,17 +57,50 @@ export default function ProductsPage() {
     setEditingProduct(undefined)
     setDialogOpen(true)
   }
+  
  
-  const newColumns=[
+  const newColumns: ColumnDef<ProductInventory>[]= [
     {
       header: "Product Name",
-      accessor: "productName" as const,
-      className: "font-medium",
-    },
+      accessorKey: "productName" as const,
+     },
     {
       header: "Category",
-      accessor: "categoryName" as const,
+      accessorKey: "categoryName" as const ,
     },
+//      {
+//   header: "Stock",
+//    accessor: "stock" as const, 
+//    cell: ({ row }: { row: { original: any } }) => {
+//     const product = row.original;
+//     const isLowStock = product.stock <= product.reorderLevel;
+//     const isOutOfStock = product.stock === 0;
+//     return (
+//       <div className="flex items-center gap-2">
+//         <span className={isOutOfStock ? "text-destructive font-medium" : isLowStock ? "text-warning font-medium" : ""}>
+//           {/* {product.stock} units */}
+//           100
+//         </span>
+//         {isLowStock && !isOutOfStock && (
+//           <AlertTriangle className="h-4 w-4 text-warning" />
+//         )}
+//         {isOutOfStock && (
+//           <span className="text-[10px] bg-destructive/10 text-destructive px-2 py-0.5 rounded-full uppercase">
+//             Empty
+//           </span>
+//         )}
+//       </div>
+//     );
+//   },
+// },
+    {
+      header: "Supplier Name",
+      accessorKey: "supplierName" as const ,
+    },
+    {
+      header: "WareHouse Name",
+      accessorKey: "warehouseName" as const ,
+    }    
   ]
 
   const columns = [
@@ -168,23 +201,23 @@ export default function ProductsPage() {
       <DataTable
         data={ProductItem}
         columns={newColumns}
-        // searchKey="name"
+        searchKey="productName"
         searchPlaceholder="Search products..."
-        actions={(row) => (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm">
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => {}}>
-                <Pencil className="h-4 w-4 mr-2" />
-                Edit
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}
+        // actions={(row) => (
+        //   <DropdownMenu>
+        //     <DropdownMenuTrigger asChild>
+        //       <Button variant="ghost" size="sm">
+        //         <MoreHorizontal className="h-4 w-4" />
+        //       </Button>
+        //     </DropdownMenuTrigger>
+        //     <DropdownMenuContent align="end">
+        //       <DropdownMenuItem onClick={() => {}}>
+        //         <Pencil className="h-4 w-4 mr-2" />
+        //         Edit
+        //       </DropdownMenuItem>
+        //     </DropdownMenuContent>
+        //   </DropdownMenu>
+        // )}
       />
 
       <ProductDialog

@@ -7,6 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { useCategory } from "@/hooks/Category/UseCategory"
 import type { Category } from "@/lib/types"
 import { categoryDto } from "@/Types/category"
+import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal, Pencil, Plus } from "lucide-react"
 import { useState } from "react"
 
@@ -38,17 +39,46 @@ export default function CategoriesPage() {
     setDialogOpen(true)
   }
 
-  const columns = [
+  const columns :ColumnDef<categoryDto>[] = [
     
     {
       header: "Category Name",
-      accessor: "name" as const,
-      className: "font-medium",
+      accessorKey: "name" as const,
+      // className: "font-medium",
     },
     {
       header: "Description",
-      accessor: "description" as const,
-    }
+      accessorKey: "description" as const,
+    },
+    {
+        id: "actions",
+        header: () => <div className="text-right">Actions</div>,
+        cell: ({ row }) => {
+          const category = row.original;
+          return (
+            <div className="flex justify-end">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="h-8 w-8">
+                    <MoreHorizontal className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem  >
+                    Edit Category
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    Close Category
+                  </DropdownMenuItem>
+                  <DropdownMenuItem >
+                    Delete Category
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          );
+        },
+      },
   ]
 
   return (
@@ -68,21 +98,21 @@ export default function CategoriesPage() {
         data={categories}
         columns={columns}
          searchPlaceholder="Search categories..."
-        actions={(row) => (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm">
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => handleEdit(row)}>
-                <Pencil className="h-4 w-4 mr-2" />
-                Edit
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}
+        // actions={(row) => (
+        //   <DropdownMenu>
+        //     <DropdownMenuTrigger asChild>
+        //       <Button variant="ghost" size="sm">
+        //         <MoreHorizontal className="h-4 w-4" />
+        //       </Button>
+        //     </DropdownMenuTrigger>
+        //     <DropdownMenuContent align="end">
+        //       <DropdownMenuItem onClick={() => handleEdit(row)}>
+        //         <Pencil className="h-4 w-4 mr-2" />
+        //         Edit
+        //       </DropdownMenuItem>
+        //     </DropdownMenuContent>
+        //   </DropdownMenu>
+        // )}
       />
 
       <CategoryDialog open={dialogOpen} onOpenChange={setDialogOpen} category={editingCategory} onSave={handleSave} />
