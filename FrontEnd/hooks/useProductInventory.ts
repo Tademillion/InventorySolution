@@ -14,8 +14,7 @@ useEffect(() => {
         setLoading(true);
         await productInventoryService.getAll()
         .then((res) => {
-            console.log("Fetched suppliers:", res.data);
-            setItems(res.data);
+             setItems(res.data);
         })
         .finally(() => setLoading(false))
         .catch((err) => {

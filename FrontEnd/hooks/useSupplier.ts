@@ -14,8 +14,7 @@ useEffect(() => {
         setLoading(true);
         await SupplierServices.getAll()
         .then((res) => {
-            console.log("Fetched suppliers:", res.data);
-            setSuppliers(res.data);
+             setSuppliers(res.data);
         })
         .finally(() => setLoading(false))
         .catch((err) => {

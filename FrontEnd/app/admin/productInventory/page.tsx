@@ -9,11 +9,12 @@ import { Plus, Pencil, AlertTriangle } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
 import { useProducts } from "@/hooks/Products/UseProducts"
-import { ProductInventory } from "@/Types/productinventory"
+import { CreateProductInventory, ProductInventory } from "@/Types/productinventory"
 import { useProductInventory } from "@/hooks/useProductInventory"
 import { DataTable } from "@/components/data-table"
   import { ColumnDef } from "@tanstack/react-table"
 import { ProductInventoryDialog } from "@/components/product-inventory-dialog"
+import { json } from "stream/consumers"
 export default function ProductsPage() {
   // const [products, setProducts] = useState(MOCK_PRODUCTS)
   const {items:ProductItem}= useProductInventory();
@@ -21,7 +22,7 @@ export default function ProductsPage() {
   const [editingProduct, setEditingProduct] = useState<ProductInventory | undefined>()
 
       const {products}= useProducts();
-   const handleSave = (productData: Partial<Product>) => {
+   const handleSave = (productData: CreateProductInventory) => {
     if (editingProduct) {
     //   // Update existing
     //   setProducts(products.map((p) => (p.id === editingProduct.id ? { ...p, ...productData } : p)))
@@ -45,7 +46,8 @@ export default function ProductsPage() {
     //   }
     //   setProducts([...products, newProduct])
     }
-    setEditingProduct(undefined)
+    console.log("the submitted inventory is ",productData)
+     setEditingProduct(undefined)
   }
 
   const handleEdit = (product: Product) => {
@@ -227,15 +229,15 @@ export default function ProductsPage() {
         //     </DropdownMenuContent>
         //   </DropdownMenu>
         // )}
-      />
+      />  
 
       <ProductInventoryDialog
         open={dialogOpen}
         onOpenChange={setDialogOpen}
         // product={editingProduct}
-        categories={MOCK_CATEGORIES}
+        // categories={MOCK_CATEGORIES}
         // suppliers={MOCK_SUPPLIERS}
-        onSave={handleSave} suppliers={[]} warehouses={[]}      />
+        onSave={handleSave}      />
     </div>
   )
 }

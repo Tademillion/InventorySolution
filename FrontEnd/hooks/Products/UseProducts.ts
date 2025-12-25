@@ -12,8 +12,7 @@ export function useProducts() {
   useEffect(() => {
     ProductService.getAll()
       .then(res => {
-        console.log("Fetched products:", res.data);
-        setProducts(res.data)})
+         setProducts(res.data)})
       .finally(() => setLoading(false)).catch(err => {
         console.error("Failed to fetch products", err);
       });
