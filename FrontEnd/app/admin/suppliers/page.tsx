@@ -6,28 +6,28 @@ import { Button } from "@/components/ui/button"
 import { useSupplier } from "@/hooks/useSupplier"
 import { MOCK_SUPPLIERS } from "@/lib/mock-data"
 import { Supplier } from "@/Types/supplier"
+import { ColumnDef } from "@tanstack/react-table"
  import { Plus } from "lucide-react"
 import { useState } from "react"
  
 export default function SuppliersPage() {
    const {addSupplier,suppliers}=    useSupplier();
-  const columns = [
+  const columns:ColumnDef<Supplier>[] = [
     {
       header: "Supplier Name",
-      accessor: "name" as const,
-      className: "font-medium",
-    },
+      accessorKey: "name" as const,
+     },
     {
       header: "Email",
-      accessor: "email" as const,
+      accessorKey: "email" as const,
     },
     {
       header: "Phone",
-      accessor: "phone" as const,
+      accessorKey: "phone" as const,
     },
     {
       header: "Address",
-      accessor: "address" as const,
+      accessorKey: "address" as const,
     },
   ]
 //  
