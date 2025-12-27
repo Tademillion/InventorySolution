@@ -37,8 +37,7 @@ const handleAddNew = () => {
   }
   const handleOnSave=(data:SupplierCreateDto)=>{
 addSupplier(data);
-console.log("data is",data);
-  }
+   }
   return (
     <div className="space-y-6">
       <div>
