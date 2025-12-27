@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Supplier } from "@/Types/supplier"
+import { Supplier, SupplierCreateDto } from "@/Types/supplier"
   
 interface SupplierDialogProps {
   open: boolean
@@ -31,6 +31,7 @@ export function SupplierDialog({
   onSave,
 }: SupplierDialogProps) {
   const [formData, setFormData] = useState<Supplier>({
+    supplierId:"",
     name: "", 
     email: "",
     phone: "",
@@ -43,6 +44,7 @@ export function SupplierDialog({
       setFormData(supplier)
     } else {
       setFormData({
+        supplierId:"",
         name: "", 
         email: "",
         phone: "",
@@ -98,6 +100,17 @@ export function SupplierDialog({
                   />
                 </div>
               </div>
+                   <div className="grid gap-2">
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  id="phone"
+                  value={formData.phone || ""}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  placeholder="+251 939 847267"
+                />
+               </div>
+               
+            
 
              
 

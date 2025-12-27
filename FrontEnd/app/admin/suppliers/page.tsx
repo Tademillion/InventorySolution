@@ -4,8 +4,7 @@ import { DataTable } from "@/components/data-table"
 import { SupplierDialog } from "@/components/supplier-dialog"
 import { Button } from "@/components/ui/button"
 import { useSupplier } from "@/hooks/useSupplier"
-import { MOCK_SUPPLIERS } from "@/lib/mock-data"
-import { Supplier } from "@/Types/supplier"
+ import { Supplier, SupplierCreateDto } from "@/Types/supplier"
 import { ColumnDef } from "@tanstack/react-table"
  import { Plus } from "lucide-react"
 import { useState } from "react"
@@ -36,8 +35,9 @@ const handleAddNew = () => {
     // setEditingWarehouse(undefined)
     setDialogOpen(true)
   }
-  const handleOnSave=(data:Supplier)=>{
+  const handleOnSave=(data:SupplierCreateDto)=>{
 addSupplier(data);
+console.log("data is",data);
   }
   return (
     <div className="space-y-6">

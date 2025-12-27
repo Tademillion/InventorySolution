@@ -1,4 +1,4 @@
- import { Supplier } from "@/Types/supplier";
+ import { Supplier, SupplierCreateDto } from "@/Types/supplier";
 import { http } from "./http";
  
 export const SupplierServices = {
@@ -7,7 +7,7 @@ export const SupplierServices = {
   getById: (id: number) =>
     http.get<Supplier>(`/suppliers/${id}`),
 
-  create: (data: Supplier) =>
+  create: (data: SupplierCreateDto) =>
     http.post("/suppliers", data),
 
   update: (id: number, data: Supplier) =>
